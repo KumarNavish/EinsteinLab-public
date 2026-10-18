@@ -1,0 +1,17 @@
+.git
+.work
+.einstein-venv
+.local-models
+.env
+.env.*
+!.env.example
+Assets
+Packages
+ProjectSettings
+evidence
+rehearsal/node_modules
+rehearsal/dist
+rehearsal/test-results
+lab_backend/data
+**/__pycache__
+**/.pytest_cache

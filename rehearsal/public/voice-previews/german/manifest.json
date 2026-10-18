@@ -1,0 +1,44 @@
+{
+  "scope": "Actual previously generated native samples with identical dialogue and German-influenced English instruction. No authentic historical recording or measured accent-authenticity score. Previewing these files makes no model request.",
+  "samples": [
+    {
+      "voice": "Algenib",
+      "direction": "subtle-German-influenced-English",
+      "text": "Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "status": "audio-received",
+      "first_packet_ms": 3200.7,
+      "audio_seconds": 18.56,
+      "transcript": " Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "wav_sha256": "7f31c62ebd0f32758e73269fdf01b0f8ef3ca9d947d32e22ee60c6e3fb6da9fa",
+      "file": "Algenib-german.wav",
+      "asset": "rehearsal/public/voice-previews/german/Algenib.wav",
+      "bytes": 890924
+    },
+    {
+      "voice": "Gacrux",
+      "direction": "subtle-German-influenced-English",
+      "text": "Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "status": "audio-received",
+      "first_packet_ms": 1899.1,
+      "audio_seconds": 17.43,
+      "transcript": " Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "wav_sha256": "a1c0541f1c4caf4f704bb471962a2a459c6d34581970c298756689d5b009492b",
+      "file": "Gacrux-german.wav",
+      "asset": "rehearsal/public/voice-previews/german/Gacrux.wav",
+      "bytes": 836686
+    },
+    {
+      "voice": "Sadaltager",
+      "direction": "subtle-German-influenced-English",
+      "text": "Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "status": "audio-received",
+      "first_packet_ms": 4039.3,
+      "audio_seconds": 17.22,
+      "transcript": " Perhaps the most interesting question is not whether a machine can think. It is whether the machine helps us think more clearly. Let us look at the evidence together, and remain a little suspicious of an answer that seems too perfect.",
+      "wav_sha256": "a1dafa3038014485d2306ab72f7117daec05ab125bffee0dae41ef532bf6afa6",
+      "file": "Sadaltager-german.wav",
+      "asset": "rehearsal/public/voice-previews/german/Sadaltager.wav",
+      "bytes": 826604
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const root=path.resolve('..');
+const out=path.join(root,'evidence/runtime/c8',`research-browser-${Date.now()}`);
+await fs.mkdir(out,{recursive:true});
+const report={scope:'Real browser, existing user-configured native voice, actual Flash inference and live official-lab pages. Public typed questions only; no human microphone or general Google Search test.',checks:[],errors:[],httpErrors:[]};
+const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+const context=await browser.newContext({viewport:{width:1440,height:1000}});
+const page=await context.newPage();
+page.on('pageerror',e=>report.errors.push(e.message));
+page.on('response',response=>{if(response.status()>=400)report.httpErrors.push({url:response.url().split('?')[0],status:response.status()});});
+const check=(name,passed,details={})=>report.checks.push({name,passed,...details});
+const question='Use consult_flash to compare VR for Relaxation and EMG for Relaxation. Keep each outcome paired with its actual comparator and distinguish reported from expected results.';
+try {
+  for(let i=0;i<45;i++){
+    try{const r=await context.request.get('http://127.0.0.1:8765/api/native/status');if(r.ok()&&(await r.json()).available)break;}catch{}
+    await new Promise(r=>setTimeout(r,1000));
+  }
+  await page.goto('http://127.0.0.1:8765/',{waitUntil:'networkidle',timeout:60000});
+  await page.waitForFunction(()=>window.__einstein?.stats.avatarReady,{},{timeout:60000});
+  check('correct_page',(await page.title())==='Einstein · Mobiliar Lab');
+  await page.getByRole('button',{name:'Conversation settings',exact:true}).click();
+  await page.locator('#conversation-engine').selectOption('native');
+  report.capabilityText=await page.locator('#web-capability').innerText();
+  check('search_limit_is_disclosed',/quota|rejected/i.test(report.capabilityText));
+  check('actual_fallback_model_is_disclosed',report.capabilityText.includes('gemini-3.6-flash'));
+  await page.keyboard.press('Escape');
+  await page.getByRole('button',{name:'Type a question',exact:true}).click();
+  await page.locator('#question').fill(question);
+  await page.getByRole('button',{name:'Send question',exact:true}).click();
+  await page.waitForFunction(()=>window.__einstein.stats.flashResearch?.status&&window.__einstein.stats.flashResearch.status!=='running',{},{timeout:60000});
+  report.research=await page.evaluate(()=>window.__einstein.stats.flashResearch);
+  check('real_flash_check_completes',report.research.status==='source-bound',report.research);
+  await page.waitForFunction(q=>window.__einstein.stats.lastTurn?.question===q,question,{timeout:90000});
+  report.answer=await page.evaluate(()=>window.__einstein.stats.lastTurn);
+  check('native_answer_retains_both_project_sources',report.answer.sources.some(s=>s.includes('vr-for-relaxation'))&&report.answer.sources.some(s=>s.includes('emg-for-relaxation')));
+  check('uncertainty_is_audible',/expect|anticipat|hypothes|aim|not yet|not report|not demonstrat/i.test(report.answer.answer));
+  check('screen_comparison_keeps_correct_endpoint',!/mood.{0,50}(more|better|higher).{0,35}screen|relaxation.{0,40}(more|better|higher).{0,30}screen/i.test(report.answer.answer));
+  await page.locator('#source-toggle').click();
+  check('evidence_dialog_opens',await page.locator('#evidence-dialog').evaluate(e=>e.open));
+  const evidence=await page.locator('#sources').innerText();
+  check('fresh_official_page_origin_visible',evidence.includes('Official lab webpage read'));
+  const hrefs=await page.locator('#sources a').evaluateAll(nodes=>nodes.map(n=>n.href));
+  check('source_links_are_actionable',hrefs.length>1&&hrefs.every(url=>url.startsWith('https://mobililab.ethz.ch/')));
+  await page.screenshot({path:path.join(out,'evidence-and-flash.png')});
+  await page.keyboard.press('Escape');
+  await page.getByRole('button',{name:'Interrupt Albert',exact:true}).click();
+  await page.waitForFunction(()=>!window.__einstein.native.active&&!window.__einstein.stats.microphoneActive);
+  check('session_closed_without_microphone',true);
+  await page.setViewportSize({width:390,height:844});
+  await page.getByRole('button',{name:'Conversation settings',exact:true}).click();
+  await page.screenshot({path:path.join(out,'mobile-settings.png')});
+  check('no_mobile_overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  check('no_console_http_errors',!report.errors.length&&!report.httpErrors.length);
+}catch(e){report.failure=e.stack;report.stateAtFailure=await page.evaluate(()=>window.__einstein?.stats).catch(()=>null);await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});}
+await page.evaluate(()=>window.__einstein?.native.stop()).catch(()=>{});
+await context.close();await browser.close();
+await fs.writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify({directory:out,...report},null,2));
+if(report.failure||report.checks.some(c=>!c.passed))process.exitCode=1;

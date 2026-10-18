@@ -1,0 +1,114 @@
+{
+  "state": "PREPARED_NOT_DISPATCHED",
+  "scope": "Read-only hosting capability inspection and offline CI preparation; no token creation, deployment, visitor or provider call.",
+  "checks": {
+    "isolatedPackagingAndReleaseInputTests": 23,
+    "workflowGuardFixtures": [
+      {
+        "guard": "exact-quality-receipt",
+        "case": "success",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "missing",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "wrong-sha",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "failed",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "untrusted-pr",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "not-complete",
+        "passed": true
+      },
+      {
+        "guard": "exact-quality-receipt",
+        "case": "latest-failure",
+        "passed": true
+      },
+      {
+        "guard": "immutable-sha",
+        "case": "valid",
+        "passed": true
+      },
+      {
+        "guard": "immutable-sha",
+        "case": "invalid-input",
+        "passed": true
+      },
+      {
+        "guard": "immutable-sha",
+        "case": "invalid-input",
+        "passed": true
+      },
+      {
+        "guard": "immutable-sha",
+        "case": "invalid-input",
+        "passed": true
+      }
+    ],
+    "actionlint": "passed",
+    "frozenCIToolsLockOffline": "passed",
+    "actualIgnoredInputBytes": "verified locally without network",
+    "setupPythonTarget": "Official actions/python-versions manifest includes 3.13.16 Linux x64"
+  },
+  "exactPublicReleaseInputs": "evidence/2026-10-16-ci/release-input-assets.json",
+  "freshNativeRebuildGitHubRunnerSeconds": null,
+  "remaining": "Manual CI has not been dispatched and GitHub-runner timings are unverified. Actual initial deployment and all host/public acceptance remain pending.",
+  "files": {
+    ".github/workflows/manual-deploy.yml": {
+      "bytes": 7358,
+      "sha256": "263828de06947c615dcf45e208d4b7c3b7c33faeeaf76c64569498ef7a285de9"
+    },
+    "deploy/fetch_release_inputs.py": {
+      "bytes": 6629,
+      "sha256": "356bc5203abbd2f88014c0f1aac51695575748a04bf2ceb3762df91936d21408"
+    },
+    "deploy/release-inputs.json": {
+      "bytes": 1216,
+      "sha256": "1c6c0153b1cd85206750e158b9bdeef9330244caf8a3c69d744ba89d5dcfb2be"
+    },
+    "deploy/test_release_inputs.py": {
+      "bytes": 6036,
+      "sha256": "973e7efc59fdadc85d551d43f8fc85356f5f82a42016ca824e9f96bc1d9ce4db"
+    },
+    "deploy/ci-tools/pyproject.toml": {
+      "bytes": 247,
+      "sha256": "3f845e7e71cdb7c7601d327ce1fa9d1d1774d4d7b6af6566a7d025ede3a488b7"
+    },
+    "deploy/ci-tools/uv.lock": {
+      "bytes": 102449,
+      "sha256": "68f72b992bba2226f6405b34231d43fcf3c93ed225c5934fe11dfb39650572f9"
+    },
+    "deploy/ci-tools/bootstrap.lock": {
+      "bytes": 160,
+      "sha256": "7d3c10eeedba8946456125a2550b22d412c72a2ccf2b8f91daf551a5eb6769fa"
+    }
+  },
+  "canonicalNativePromotion": "verified",
+  "freshNativeRebuildLocalSeconds": 232.762,
+  "actualLocalStage": {
+    "path": "/Users/kumar0002/Projects/EinsteinLab-launch/.work/fastapi-final-stage-20261016-v2",
+    "files": 9330,
+    "bytes": 614962368,
+    "manifestSha256": "0b33ed8068d09c55e1d5e87a15d9cf1762608cd1826f434f6fe61150c3c49822",
+    "backendModules": 30,
+    "publicSnapshotPages": 120,
+    "entrypoint": "main:app",
+    "targetPython": "3.13.16",
+    "hostPort": 8080
+  }
+}

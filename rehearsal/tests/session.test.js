@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {TurnGate,bytesFromBase64,base64FromBlob} from '../src/session.js';
+test('interrupt invalidates stale responses and aborts their transport',()=>{const g=new TurnGate();const a=g.next();assert(g.current(a.version));g.cancel();assert(a.signal.aborted);assert(!g.current(a.version));const b=g.next();assert(g.current(b.version));assert(!g.current(a.version));});
+test('next turn cannot accept output from its predecessor',()=>{const g=new TurnGate();const a=g.next();const b=g.next();assert(a.signal.aborted);assert(!b.signal.aborted);assert(!g.current(a.version));});
+test('binary audio survives base64 transfer',async()=>{const bytes=new Uint8Array([0,1,127,128,255]);const text=await base64FromBlob(new Blob([bytes]));assert.deepEqual(bytesFromBase64(text),bytes);});

@@ -1,0 +1,6 @@
+libreoffice-impress
+libreoffice-calc
+poppler-utils
+bubblewrap
+fonts-dejavu-core
+fonts-liberation

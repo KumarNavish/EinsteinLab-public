@@ -1,0 +1,7 @@
+# Private feedback and immutable character chunks; the app uses FastAPI Cloud.
+[build]
+  publish = "feedback-site"
+
+[functions]
+  directory = "feedback-collection/functions"
+  node_bundler = "esbuild"

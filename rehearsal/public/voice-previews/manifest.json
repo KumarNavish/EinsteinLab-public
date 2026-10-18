@@ -1,0 +1,28 @@
+{
+  "model": "gemini-3.8-live",
+  "recorded_at": "2026-10-14T11:44:37Z",
+  "scope": "Fixed-text recordings from the actual native voices. Preview playback sends no provider request; these samples are not live answers.",
+  "samples": [
+    {
+      "voice": "Gacrux",
+      "file": "Gacrux.wav",
+      "text": "A good question is a promising beginning. Tell me, what are you curious about?",
+      "audio_seconds": 5.27,
+      "sha256": "f92342ec806967e4ee29fd1065a2519cc227a50fcc01b0717eb98c68f65c7f6d"
+    },
+    {
+      "voice": "Algenib",
+      "file": "Algenib.wav",
+      "text": "A good question is a promising beginning. Tell me, what are you curious about?",
+      "audio_seconds": 5.08,
+      "sha256": "a7bf876ed25846e171e8ec0f65b7bd50bf8672db38b202d6a66bbae8af294660"
+    },
+    {
+      "voice": "Sadaltager",
+      "file": "Sadaltager.wav",
+      "text": "A good question is a promising beginning. Tell me, what are you curious about?",
+      "audio_seconds": 5.95,
+      "sha256": "096d849fbc37a2ee1435c35c70c3544fa9c9ac868034963865001ef1353c48be"
+    }
+  ]
+}

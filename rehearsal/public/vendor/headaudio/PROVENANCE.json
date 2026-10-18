@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/met4citizen/HeadAudio",
+  "commit": "d3af5f9ff86ab6b2b1913d411a4e1922ec101953",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "headaudio.min.mjs",
+      "bytes": 6443,
+      "sha256": "3d7635d8a9f9882dc804e5caacfb501a30a53d2c4f4c2cce85247bb6244de140"
+    },
+    {
+      "path": "headworklet.min.mjs",
+      "bytes": 13237,
+      "sha256": "37ebeb1d4d7e41fca7d12bb8fb411f7ce6bb21a2589602dec18e0a48b343be55"
+    },
+    {
+      "path": "model-en-mixed.bin",
+      "bytes": 14352,
+      "sha256": "0358f68989b5861f9b7d18871b010fa6cbf88a53bda4954a954d8c548bbcf251"
+    }
+  ],
+  "integration_limit": "Audio-driven viseme estimates, not provider-supplied phoneme timing. No hosted inference or transcription."
+}

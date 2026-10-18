@@ -1,0 +1,129 @@
+{
+  "status": "actual-full-stage-verified-not-deployed",
+  "scope": "Actual canonical native and current public source allowlist staged and revalidated. No deployment, visitor/provider call or canonical native modification.",
+  "checks": {
+    "isolatedPackagingTests": 17,
+    "releaseInputTests": 6,
+    "combinedFocusedTests": 23,
+    "diffCheck": "passed",
+    "sourceAndDestinationHashesModesInventory": "passed using final check-before-hash validator",
+    "stagedNativeIndependentVerifyOnly": "passed",
+    "canonicalPublicPins": 36,
+    "startupCLI": "fastapi-cli==0.0.32",
+    "deploymentAccountCLIIncluded": false
+  },
+  "actualStage": {
+    "path": "/Users/kumar0002/Projects/EinsteinLab-launch/.work/fastapi-final-stage-20261016-v2",
+    "files": 9330,
+    "bytes": 614962368,
+    "manifestSha256": "0b33ed8068d09c55e1d5e87a15d9cf1762608cd1826f434f6fe61150c3c49822",
+    "backendModules": 30,
+    "publicSnapshotPages": 120,
+    "entrypoint": "main:app",
+    "targetPython": "3.13.16",
+    "hostPort": 8080
+  },
+  "canonicalNative": {
+    "sha256": "1bf859f031264b8525830a13f3952ad870b0dd39b75b028e72cd7979f40d09c1",
+    "regular_files": 9267,
+    "bytes": 552947803
+  },
+  "freshNativeRebuild": {
+    "status": "verified",
+    "scope": "Fresh local cache, official pinned downloads, stdlib extraction, relocation and full regular-file/link digest comparison. Not a CI-host timing guarantee.",
+    "seconds": 232.762,
+    "native_tree": {
+      "sha256": "1bf859f031264b8525830a13f3952ad870b0dd39b75b028e72cd7979f40d09c1",
+      "regular_files": 9267,
+      "bytes": 552947803
+    },
+    "payload_bytes": 158595648
+  },
+  "nativeScannerHits": [
+    {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "matchKind": "PEM-private-key-shape",
+      "offset": 1586912
+    },
+    {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "matchKind": "PEM-private-key-shape",
+      "offset": 1587136
+    },
+    {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "matchKind": "PEM-private-key-shape",
+      "offset": 1587296
+    },
+    {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "matchKind": "PEM-private-key-shape",
+      "offset": 1589056
+    },
+    {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "matchKind": "PEM-private-key-shape",
+      "offset": 1590880
+    }
+  ],
+  "exactPublicExceptions": {
+    "catalog": {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/avahi/service-types.db",
+      "bytes": 16384,
+      "sha256": "e7127eef5e5dbef519a8ad51bed5e84b21675b42240eb2a072220731843f3b15"
+    },
+    "PEM-shapes-only": {
+      "path": "deploy/native/usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "bytes": 2209528,
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "package": "libgnutls30",
+      "version": "3.7.9-2+deb12u7",
+      "officialPayloadSha256": "30abec8c824feb1d2d7e9000a34083cccd19d139625e1b21547e3ac53b922f8e",
+      "url": "https://deb.debian.org/debian/pool/main/g/gnutls28/libgnutls30_3.7.9-2+deb12u7_amd64.deb",
+      "basis": "Canonical signature-reviewed public package bytes; no local credential is exempt. Google/AQ scans remain active."
+    }
+  },
+  "preservedFailures": [
+    "Initial stage refused public Avahi DB under generic DB rule before output creation.",
+    "The next attempt refused PEM-shaped public constants before output creation; all native matches were then enumerated in one pass without matching values."
+  ],
+  "sources": {
+    "scripts/build_fastapi_bundle.py": {
+      "bytes": 17890,
+      "sha256": "18b634bccc997e8afed1815e1c93719d9779ca4c535a6f281923f0fb14edff21"
+    },
+    "deploy/fastapicloud/test_bundle.py": {
+      "bytes": 11690,
+      "sha256": "5d5dd8978a8789e23adf1c16323e8c82d736711dfe3a9bae3746341417d3a7f3"
+    },
+    "deploy/fastapicloud/README.md": {
+      "bytes": 4826,
+      "sha256": "a3e87c0c03aea64a0561215703e8fcabc5fdcc0a0cb59b508a5489b9995df58c"
+    },
+    "deploy/fastapicloud/main.py": {
+      "bytes": 552,
+      "sha256": "f77f7d2b18acd762e66c4313881606c519687342f4720223548b6d0944473d1d"
+    },
+    "deploy/fastapicloud/pyproject.toml": {
+      "bytes": 1095,
+      "sha256": "3199cf7531803bdf6ef9248441db10bde4393f1d6d5d636fec68be257e164df7"
+    },
+    "deploy/fastapicloud/uv.lock": {
+      "bytes": 101933,
+      "sha256": "67e561c3ee7a2cfd2d9d0f00569a3c0ac76b71b98024ba119edc1f7ad300fb91"
+    },
+    "deploy/fastapicloud/.python-version": {
+      "bytes": 8,
+      "sha256": "2d82946ffb2ecf549699ebb86ecbbe663bbc19d53c49c681a1a425f003f80ddb"
+    },
+    "deploy/fastapicloud/.fastapicloudignore": {
+      "bytes": 472,
+      "sha256": "c1aac8d467d03a62ac40a79511d00a4874b20cf60bb1a3b012692fb464f17736"
+    }
+  }
+}

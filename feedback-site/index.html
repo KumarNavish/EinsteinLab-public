@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Private feedback for the Einstein research companion.">
+  <title>Einstein · Private feedback</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/feedback.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">Einstein</p><h1>How did it feel?</h1>
+      <p class="intro">Tell us what helped, what felt unnatural, or what got in your way.</p></header>
+    <p class="privacy">Your answers are private to the project owner. No conversation transcript or microphone recording is attached. Please leave out names, email addresses and other personal information.</p>
+    <form name="einstein-feedback" method="POST" action="/thanks" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="website">
+      <input type="hidden" name="form-name" value="einstein-feedback">
+      <input type="hidden" name="request_id" id="request-id">
+      <label>Overall experience <span>Required</span>
+        <select name="rating" required><option value="">Choose a rating</option><option value="5">5 · Excellent</option><option value="4">4 · Good</option><option value="3">3 · Mixed</option><option value="2">2 · Poor</option><option value="1">1 · Did not work</option></select>
+      </label>
+      <div class="pair">
+        <label>Avatar realism <span>Optional</span><select name="realism"><option value="">Not rated</option><option value="5">5 · Convincing</option><option value="4">4 · Mostly convincing</option><option value="3">3 · Mixed</option><option value="2">2 · Unconvincing</option><option value="1">1 · Very unconvincing</option></select></label>
+        <label>Voice naturalness <span>Optional</span><select name="voice"><option value="">Not rated</option><option value="5">5 · Natural</option><option value="4">4 · Mostly natural</option><option value="3">3 · Mixed</option><option value="2">2 · Unnatural</option><option value="1">1 · Very unnatural</option></select></label>
+      </div>
+      <label>Feedback type<select name="kind"><option value="impression">Experience</option><option value="bug">Something broke</option><option value="suggestion">Suggestion</option></select></label>
+      <label>What should we know? <span>Optional</span><textarea name="message" maxlength="2000" rows="4" placeholder="What felt useful, confusing, or unnatural?"></textarea></label>
+      <label>What were you trying to do? <span>Optional</span><textarea name="context" maxlength="1000" rows="3" placeholder="A little context helps us understand your experience."></textarea></label>
+      <p class="honeypot" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></p>
+      <div class="challenge" data-netlify-recaptcha="true"></div>
+      <button type="submit">Send private feedback</button>
+      <p class="small">Complete the human check before sending. You can keep your Einstein conversation open in its original tab.</p>
+    </form>
+    <footer>Feedback is stored by Netlify for the project owner. The human check is provided by Google; its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</footer>
+  </main>
+</body>
+</html>

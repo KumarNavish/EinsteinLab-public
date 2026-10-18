@@ -1,0 +1,86 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const root = path.resolve('..'), out = path.join(root, 'evidence/runtime/c18');
+await fs.mkdir(out, {recursive: true});
+const fixture = path.join(root, '.work/c18-documents/controlled-source.pdf');
+const truth = JSON.parse(await fs.readFile(path.join(root, '.work/c18-documents/controlled-source-truth.json'), 'utf8'));
+const report = {scope: 'Actual browser-local PDF renderer and real published paper, no provider session or microphone. Overlay test directly exercises the renderer, not autonomous model annotation. Browser skill absent; isolated Playwright Chrome.', checks: [], errors: [], warnings: [], requests: []};
+const browser = await chromium.launch({channel: 'chrome', headless: true});
+const context = await browser.newContext({viewport: {width: 1440, height: 1000}});
+const page = await context.newPage();
+page.on('pageerror', error => report.errors.push(error.message));
+page.on('console', message => { if (message.type() === 'error') report.errors.push(message.text()); if (message.type() === 'warning') report.warnings.push(message.text()); });
+page.on('request', request => report.requests.push({method: request.method(), url: request.url().split('?')[0]}));
+const check = (name, passed, extra = {}) => report.checks.push({name, passed, ...extra});
+try {
+  await page.goto('http://127.0.0.1:8765/', {waitUntil: 'networkidle', timeout: 90000});
+  await page.waitForFunction(() => window.__einstein?.stats.avatarReady && window.__einstein.paper, {}, {timeout: 90000});
+  check('correct_page', await page.title() === 'Einstein · Mobiliar Lab');
+  check('pdf_library_is_lazy', !report.requests.some(request => /local-pdf-|pdf.worker/.test(request.url)));
+  await page.locator('#paper-file').setInputFiles(fixture);
+  await page.waitForFunction(() => window.__einstein.paper.pdf?.pageNumber === 1, {}, {timeout: 30000});
+  check('selected_original_pages', await page.evaluate(() => window.__einstein.paper.pdf.manifest.pages === 3));
+  check('no_external_approval_assumed', await page.evaluate(() => window.__einstein.stats.document.approved === false));
+  await page.locator('#paper-next').click();
+  await page.waitForFunction(() => window.__einstein.paper.pdf?.pageNumber === 2, {}, {timeout: 30000});
+  report.extractedFigureText = await page.evaluate(() => window.__einstein.paper.pdf.text);
+  check('raster_marker_is_not_in_text', !report.extractedFigureText.includes(truth.marker));
+  report.originalDigest = await page.evaluate(async () => {
+    const canvas = window.__einstein.paper.pdf.canvas;
+    const bytes = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+    return [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(x => x.toString(16).padStart(2, '0')).join('');
+  });
+  await page.screenshot({path: path.join(out, 'original-pdf-local.png')});
+  await page.evaluate(() => {
+    const viewer = window.__einstein.paper;
+    viewer.marks.set(2, [{kind: 'ellipse', region: [.16, .26, .32, .23], label: 'Renderer test overlay'}]);
+    viewer.paint();
+  });
+  const after = await page.evaluate(async () => {
+    const viewer = window.__einstein.paper, canvas = viewer.pdf.canvas;
+    const bytes = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+    const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const overlay = viewer.overlay.getContext('2d').getImageData(0, 0, viewer.overlay.width, viewer.overlay.height).data;
+    return {digest, nontransparentOverlayPixels: overlay.filter((_, index) => index % 4 === 3 && overlay[index] > 0).length};
+  });
+  check('annotation_does_not_change_source_pixels', after.digest === report.originalDigest);
+  check('annotation_is_actually_rendered', after.nontransparentOverlayPixels > 500);
+  await page.locator('#paper-zoom').selectOption('2');
+  const aligned = await page.evaluate(() => {
+    const a = document.querySelector('#paper-original').getBoundingClientRect(), b = document.querySelector('#paper-annotations').getBoundingClientRect();
+    return Math.abs(a.left - b.left) < 1 && Math.abs(a.top - b.top) < 1 && Math.abs(a.width - b.width) < 1 && Math.abs(a.height - b.height) < 1;
+  });
+  check('overlay_stays_aligned_at_200_percent', aligned);
+  await page.setViewportSize({width: 390, height: 844}); await page.waitForTimeout(250);
+  check('mobile_no_page_overflow', await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  check('paper_remains_scrollable', await page.locator('.paper-scroll').evaluate(element => element.scrollHeight > element.clientHeight));
+  await page.screenshot({path: path.join(out, 'original-pdf-mobile.png')});
+  await page.locator('#paper-remove').click();
+  await page.waitForFunction(() => !window.__einstein.stats.document.selected);
+  check('closing_drops_document', await page.evaluate(() => window.__einstein.paper.pdf === null && !window.__einstein.stats.microphoneActive));
+  await page.setViewportSize({width: 1440, height: 1000});
+  await page.locator('#paper-file').setInputFiles(path.join(root, '.work/c18-documents/tracemonkey-original.pdf'));
+  await page.waitForFunction(() => window.__einstein.paper.pdf?.pageNumber === 1, {}, {timeout: 30000});
+  check('real_published_paper_renders', await page.evaluate(() => window.__einstein.paper.pdf.manifest.pages === 14 && window.__einstein.paper.pdf.text.includes('Trace-based')));
+  await page.locator('#paper-next').click();
+  await page.waitForFunction(() => window.__einstein.paper.pdf?.pageNumber === 2, {}, {timeout: 30000});
+  check('original_figure_page_is_available', await page.evaluate(() => window.__einstein.paper.pdf.text.includes('TraceMonkey') && window.__einstein.paper.pdf.text.includes('Figure 2')));
+  await page.screenshot({path: path.join(out, 'original-paper-figure.png')});
+  await page.locator('#paper-remove').click();
+  await page.locator('#paper-file').setInputFiles({name: 'malformed.pdf', mimeType: 'application/pdf', buffer: Buffer.from('not a PDF document')});
+  await page.waitForFunction(() => document.querySelector('#paper-status').textContent.includes('not a PDF'), {}, {timeout: 10000});
+  check('malformed_file_is_rejected', await page.locator('#paper-discuss').isDisabled());
+  await page.locator('#paper-remove').click();
+  check('no_provider_upload_or_mutation', !report.requests.some(request => request.method !== 'GET'));
+  check('no_remote_document_request', report.requests.every(request => new URL(request.url).hostname === '127.0.0.1' || request.url.startsWith('blob:')));
+  check('runtime_console_clean', report.errors.length === 0);
+} catch (error) {
+  report.failure = error.stack;
+  report.state = await page.evaluate(() => ({document: window.__einstein?.stats.document, status: document.querySelector('#paper-status')?.textContent})).catch(() => null);
+  await page.screenshot({path: path.join(out, 'pdf-browser-failure.png')}).catch(() => {});
+}
+await context.close(); await browser.close();
+await fs.writeFile(path.join(out, 'pdf-browser.json'), JSON.stringify(report, null, 2));
+console.log(JSON.stringify(report, null, 2));
+if (report.failure || report.checks.some(item => !item.passed)) process.exitCode = 1;

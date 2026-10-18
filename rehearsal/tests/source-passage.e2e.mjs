@@ -1,0 +1,41 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+
+const out=path.resolve('../evidence/runtime/c12/source-card-'+Date.now());
+await fs.mkdir(out,{recursive:true});
+const report={scope:'Actual rendered exact-source card and non-destructive phrase highlighting using a disclosed text fixture. No new page read or provider call. The independent native test determines whether the model selects actual sources.',checks:[],errors:[]};
+const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+const page=await browser.newPage({viewport:{width:1536,height:1000}});
+page.on('pageerror',error=>report.errors.push(error.message));
+const text='Expected results\nWe are testing whether a clearer explanation changes the effort required to make a decision. This is a research hypothesis, not a demonstrated improvement. The original source wording must remain unchanged when the teacher highlights a phrase.';
+const quote='a research hypothesis, not a demonstrated improvement';
+const index=text.indexOf(quote),hash=createHash('sha256').update(text).digest('hex');
+const passage={source_id:'disclosed-fixture',title:'Test fixture · not empirical evidence',url:'https://mobililab.ethz.ch/',fetched_at:'2026-10-14T00:00:00Z',text,displayed_text_sha256:hash,source_excerpt_sha256:hash,source_range:[0,text.length],omitted_before:false,omitted_after:false,quote,quote_range:[index,index+quote.length],scope:'Disclosed QA text fixture, not a lab finding or fetched paper.'};
+const check=(name,passed,details={})=>report.checks.push({name,passed,...details});
+try{
+  await page.goto('http://127.0.0.1:8765/',{waitUntil:'networkidle',timeout:60000});
+  await page.waitForFunction(()=>window.__einstein?.stats.avatarReady,{}, {timeout:60000});
+  const receipt=await page.evaluate(async p=>await window.__einstein.board.apply({kind:'source',passage:p,action_id:'qa-source',revision:1},()=>true),passage);
+  check('exact_text_hash_acknowledged',receipt.status==='source-displayed'&&receipt.displayed_text_sha256===hash&&receipt.highlighted_quote===quote);
+  const displayed=await page.evaluate(()=>({passage:window.__einstein.stats.visual.passage,layout:window.__einstein.board.passageLayout}));
+  check('source_text_not_rewritten',displayed.passage.text===text);
+  check('every_highlight_box_is_inside_exact_quote',displayed.layout.boxes.length>0&&displayed.layout.boxes.every(box=>box.from>=index&&box.to<=index+quote.length));
+  await page.screenshot({path:path.join(out,'source-card-desktop.png')});
+  await page.locator('#read-diagram').click();
+  check('accessible_source_text_and_original_link',await page.locator('#diagram-dialog').evaluate((dialog,expected)=>dialog.open&&dialog.textContent.includes(expected),text));
+  await page.screenshot({path:path.join(out,'source-readable-view.png')});
+  await page.keyboard.press('Escape');
+  const second={...passage,quote:'Expected results',quote_range:[0,16]};
+  const focused=await page.evaluate(async p=>await window.__einstein.board.apply({kind:'phrase',passage:p,action_id:'qa-focus',revision:2},()=>true),second);
+  check('changed_focus_preserves_source_hash',focused.status==='phrase-focused'&&focused.displayed_text_sha256===hash);
+  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(500);
+  check('responsive_no_horizontal_overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  await page.locator('#read-diagram').click();await page.screenshot({path:path.join(out,'source-card-mobile.png')});
+  await page.keyboard.press('Escape');
+  await page.evaluate(()=>window.__einstein.board.apply({kind:'hide',action_id:'qa-hide',revision:3},()=>true));
+  check('hide_removes_source_and_teaching_layout',await page.evaluate(()=>!window.__einstein.board.passage&&!document.body.classList.contains('teaching-active')));
+  check('console_clean',report.errors.length===0);
+}catch(error){report.failure=error.stack;await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});}
+await browser.close();await fs.writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({directory:out,...report},null,2));if(report.failure||report.checks.some(item=>!item.passed))process.exitCode=1;

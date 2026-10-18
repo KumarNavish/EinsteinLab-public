@@ -1,0 +1,78 @@
+{
+  "origin": "https://einstein-mobiliar-lab.netlify.app",
+  "pathPrefix": "/character/0fdd4280d69169c93e69f3586b8956077223d1178523acc028b46c1b31ba89fc/",
+  "bytes": 55079784,
+  "sha256": "0fdd4280d69169c93e69f3586b8956077223d1178523acc028b46c1b31ba89fc",
+  "chunks": [
+    {
+      "name": "000-4e5428a20920193a6c1c75d0e8f60538ed1efef654015495633019f2542947d8.bin",
+      "bytes": 4194304,
+      "sha256": "4e5428a20920193a6c1c75d0e8f60538ed1efef654015495633019f2542947d8"
+    },
+    {
+      "name": "001-07e939548cd4fb645af88a939c0dcd311092ba06c6a7b3a745cdd29509b025c2.bin",
+      "bytes": 4194304,
+      "sha256": "07e939548cd4fb645af88a939c0dcd311092ba06c6a7b3a745cdd29509b025c2"
+    },
+    {
+      "name": "002-156e23b4311c0efd7afd894aa98249a203cd9a6fad4b673050a9ca01c97cc3e9.bin",
+      "bytes": 4194304,
+      "sha256": "156e23b4311c0efd7afd894aa98249a203cd9a6fad4b673050a9ca01c97cc3e9"
+    },
+    {
+      "name": "003-4a3aa26540245e34fec94c87d9f3227e9146925f0c94d2f8b307526b90e9ece0.bin",
+      "bytes": 4194304,
+      "sha256": "4a3aa26540245e34fec94c87d9f3227e9146925f0c94d2f8b307526b90e9ece0"
+    },
+    {
+      "name": "004-a69ce29368e2f72d29d4df49928058c426a2620439d35587507009060943b133.bin",
+      "bytes": 4194304,
+      "sha256": "a69ce29368e2f72d29d4df49928058c426a2620439d35587507009060943b133"
+    },
+    {
+      "name": "005-0eb34829d68bf1de254b04574fea4755dfea4e562d581181149d7f3d85efe968.bin",
+      "bytes": 4194304,
+      "sha256": "0eb34829d68bf1de254b04574fea4755dfea4e562d581181149d7f3d85efe968"
+    },
+    {
+      "name": "006-7ccd1048e8e7ef1d5c2c9d8c50280ee3ed5311a33d8617fd3c9acea09b6ae27f.bin",
+      "bytes": 4194304,
+      "sha256": "7ccd1048e8e7ef1d5c2c9d8c50280ee3ed5311a33d8617fd3c9acea09b6ae27f"
+    },
+    {
+      "name": "007-271a0e6c77d9e86a1a235fb32e9d26fdd724b758bc03728f67859501d2312b07.bin",
+      "bytes": 4194304,
+      "sha256": "271a0e6c77d9e86a1a235fb32e9d26fdd724b758bc03728f67859501d2312b07"
+    },
+    {
+      "name": "008-6af0665769a728108af84250c90e1ca49716ee62c013f9484d3e760b1e8bae26.bin",
+      "bytes": 4194304,
+      "sha256": "6af0665769a728108af84250c90e1ca49716ee62c013f9484d3e760b1e8bae26"
+    },
+    {
+      "name": "009-586d55b93d6401dd256036c268752957607c07a508685d181b5586a8cd2429d0.bin",
+      "bytes": 4194304,
+      "sha256": "586d55b93d6401dd256036c268752957607c07a508685d181b5586a8cd2429d0"
+    },
+    {
+      "name": "010-6de8b64df208e4d8ede61ccc5d4032a6a803560a318baed4dbfcce317540c7a8.bin",
+      "bytes": 4194304,
+      "sha256": "6de8b64df208e4d8ede61ccc5d4032a6a803560a318baed4dbfcce317540c7a8"
+    },
+    {
+      "name": "011-7bdfb611fdfb75646a3b539b015ebe8a97b5a8cb714bee742e85a7b5d41ba636.bin",
+      "bytes": 4194304,
+      "sha256": "7bdfb611fdfb75646a3b539b015ebe8a97b5a8cb714bee742e85a7b5d41ba636"
+    },
+    {
+      "name": "012-6ce599e38db38a16e3f43e23cf120a80068107c1f0a57290ca5a3608d7a064a9.bin",
+      "bytes": 4194304,
+      "sha256": "6ce599e38db38a16e3f43e23cf120a80068107c1f0a57290ca5a3608d7a064a9"
+    },
+    {
+      "name": "013-c3b49bde91058997ad4f39817372637feb255c14a5f38ccde197aaf429d8939b.bin",
+      "bytes": 553832,
+      "sha256": "c3b49bde91058997ad4f39817372637feb255c14a5f38ccde197aaf429d8939b"
+    }
+  ]
+}

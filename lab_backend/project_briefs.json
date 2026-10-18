@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "disclosure": "Reviewed, source-bound research explanations. These are authored summaries, not live language-model generation or historical quotations. They are invalidated when the underlying page text changes.",
+  "projects": {
+    "llms-and-cognitive-load": {
+      "source_sha256": "98bf6ecef02249ab30c7d74e0b8c8fb756aa4ba546fd5893b3c8e373136d49f2",
+      "mechanism": "Imagine asking for roadside help while already stressed. This project tests how a chatbot's role and presentation should adapt to that mental workload.",
+      "finding": "The project page states a hypothesis: simpler chatbot role cues may help when people are overloaded. It does not present that hypothesis as an established result.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "delegating-to-agentic-ai": {
+      "source_sha256": "6157c39552e9bbc88dc4a71ef427f6a16340858a06ca9665451e12f2a38d4b4b",
+      "mechanism": "The question is when we let AI choose for us. The study tests whether explaining an AI's insurance recommendations changes people's willingness to delegate the purchase.",
+      "finding": "The work is ongoing. It aims to test whether particular explanations encourage delegation even when the recommended insurance product is objectively worse.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "genai-in-vr": {
+      "source_sha256": "36b579455cca7b83f73364753f7c8a6c8cf936137d89e05de118011aec280cad",
+      "mechanism": "You describe a scene; the system creates a virtual setting. The research asks whether that personal control can improve relaxation.",
+      "finding": "Personalized scene generation is implemented. Improved relaxation, control, engagement and immersion are listed as expected outcomes on the project page, not established findings there.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "emg-for-relaxation": {
+      "source_sha256": "885f6e35062f7ae7753e2fcc50a5e541d299fdbd24c9b022ea9c02a7bfab35e8",
+      "mechanism": "Sensors detect tension in the neck and shoulder muscle. A virtual-reality exercise then guides relaxation and shows people how their bodily state is changing.",
+      "finding": "The project expects sensor-informed virtual relaxation to outperform environments without this feedback. That benefit is an expectation, not a reported result on this page.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "human-robot-interaction": {
+      "source_sha256": "51781521975b097206b82991d580d413128cda1d34fd2709132dd90e7809b512",
+      "mechanism": "Robotic training need not ignore the person using it. This project combines physiological signals with emotion classification to display feedback about stress, focus and fatigue.",
+      "finding": "Better resilience, focus and skill acquisition are expected outcomes. The project page does not establish that adaptive feedback has already delivered those improvements.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "neurofeedback-for-relaxation": {
+      "source_sha256": "0872571ddf4dedf8250f0116866f8e4f5b66c6766651dd77da39765b2eb53d09",
+      "mechanism": "The project brings brain-activity feedback into everyday mental training. It explores wireless EEG, virtual reality and personalized learning for focus and relaxation.",
+      "finding": "Personalized training and a validated virtual-reality protocol are intended outcomes. They should not be mistaken for completed validation simply because the project describes them.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "neuromarkers-for-emotion": {
+      "source_sha256": "f5d681d2413f622694076bcc3d286f38b06040d03fb4a41d7cffd63c558392f5",
+      "mechanism": "Emotionally demanding conversations consume mental resources. This work studies how customer communication affects cognitive load, wellbeing and performance, and looks for brain-based indicators of those states.",
+      "finding": "The work aims to inform real-time support for excessive cognitive load and stress. The listed outcomes are expectations, not established effects of a deployed intervention.",
+      "sections": ["Approach", "Expected Results"]
+    },
+    "neuromarkers-for-cognitive-load": {
+      "source_sha256": "df620f6283201158f83c1059ef76fd12e2e1e4ce9d26170f86b02a48ab4eb391",
+      "mechanism": "The project uses EEG signals to distinguish levels of mental workload. Its page reports classification into three categories with 60 percent accuracy.",
+      "finding": "The page reports 60 percent accuracy across three cognitive-load categories and a result above its baseline classifiers. It does not provide enough detail there for an independent comparison.",
+      "sections": ["Approach"]
+    },
+    "llms-for-smes": {
+      "source_sha256": "01a8456566b21c488a2b3560b36b718cda714f559b60d5199189c4f04293464a",
+      "mechanism": "A small business needs more than an impressive model. This project studies conversational recommendations while balancing answer quality, running costs and response time.",
+      "finding": "Prompt-based recommendations were feasible, but costs and latency limited the system to higher-margin settings. An additional retrieval language model was a major contributor to those costs.",
+      "sections": ["Approach", "Results"]
+    },
+    "telematics-for-road-safety": {
+      "source_sha256": "3391a73ec2dd7390dbd7cbb6028c0eecdc8cc5c1b2d89bec35eb35574aadeda8",
+      "mechanism": "Young drivers receive feedback about their driving. The project studies which kinds of feedback fit different drivers and whether that changes real-world driving behaviour.",
+      "finding": "The reported effect on driving behaviour was small. The effect on accident probability was not statistically significant, so this is not evidence of a proven reduction in accidents.",
+      "sections": ["Approach", "Results"]
+    },
+    "ar-for-collaboration": {
+      "source_sha256": "dcf325a254d8c23ca4fcbc83c2b3e9e5230274667f2182f9825bbe1c197ba98c",
+      "mechanism": "People with different backgrounds learn data science together in an immersive environment. They build and discuss models rather than encountering only abstract mathematical explanations.",
+      "finding": "The system supported sustained collaboration across backgrounds. Clear roles helped, and the researchers emphasized critical thinking rather than blind confidence in model outputs.",
+      "sections": ["Approach", "Results"]
+    },
+    "ai-for-trust": {
+      "source_sha256": "a51da025a215e9b473031879bbf15487da2661dd0e40bf4130c58f174adae51b",
+      "mechanism": "Trust is not simply agreement with a machine. This project examines how people evaluate AI and how decision-support design affects their judgement.",
+      "finding": "In the reported decision-support experiment, recommendations encouraged more uncritical acceptance. Hypothesis-driven support encouraged analytical thinking and better decision accuracy.",
+      "sections": ["Approach", "Results"]
+    },
+    "transformers-for-emotion-recognition": {
+      "source_sha256": "dd8e6fe2da4708cc57a5841ec1ff5e6262dbf09efa53b2f2f5803154f51a98a8",
+      "mechanism": "Recognizing emotion takes more than spotting emotional words. This project puts appraisal theory into a transformer to model the context and cognitive processes behind conversational emotions.",
+      "finding": "The project page reports strong benchmark results, including improvements over prior models. The page alone does not establish performance outside the evaluated datasets.",
+      "sections": ["Approach", "Outcomes"]
+    },
+    "vr-for-relaxation": {
+      "source_sha256": "241560beeb544703250c2354f31044374025bfb6fbd3a7adfb8e0a1b8c4b6533",
+      "mechanism": "People practice slow, paced breathing while seeing their heart activity in virtual reality. The feedback is intended to support control over stress-related bodily processes.",
+      "finding": "The page reports reduced perceived stress after one session. A four-week programme also improved physiological and psychological stress measures compared with a group receiving no intervention.",
+      "sections": ["Approach", "Results"]
+    },
+    "ai-for-stress-detection": {
+      "source_sha256": "30a8f9ba8a517a851bf3495a44ab2bca1b0bf910cf69aca439306bd4175fb9c3",
+      "mechanism": "Everyday mouse movements, typing and heart activity can provide signals about stress. This project studies detection alongside employees' privacy, accountability and wellbeing concerns.",
+      "finding": "The page reports detecting self-reported stress in a laboratory study. It separately describes real-office validation, so laboratory detection should not be equated with proven workplace deployment.",
+      "sections": ["Approach", "Results"]
+    },
+    "xai-in-dialog-sentiment": {
+      "source_sha256": "6ffd752388a4d23144001147c1506b95ee4e6fc0a0ede7ca98a9a01f3b543aa6",
+      "mechanism": "DialogueTraX aims to recognize emotion using the surrounding conversation, then explain its predictions. The goal is to make the model's reasoning easier to inspect and debug.",
+      "finding": "Improved accuracy, trust and adaptability are expected outcomes in this project description. The page does not establish that each intended benefit has already been demonstrated.",
+      "sections": ["Our Approach", "Expected Outcomes"]
+    },
+    "chatbot-for-trust": {
+      "source_sha256": "c00f231f01eaf64c667bbd7fa2c1eec0a0af0bf6ee6cfc22a14789f5eb6cc3a4",
+      "mechanism": "The project studies roadside-assistance chatbots. It asks how the chatbot's role cues should fit the mental workload people experience while seeking help.",
+      "finding": "The page reports that low-complexity role cues suit high-load situations, while richer cues suit simpler settings. That result belongs to this completed chatbot study.",
+      "sections": ["Approach", "Results"]
+    },
+    "ai-investment-agent": {
+      "source_sha256": "2197290af14a1c1e8a7696249bbd8ee6aacd6287304f4e42ac3127985750425e",
+      "mechanism": "The project combines language-model signals with reinforcement learning for stock trading. It studies whether textual market information can improve the trading framework.",
+      "finding": "The reported improvements come from backtests on market data. They are not evidence of guaranteed future returns or a verified live-trading advantage.",
+      "sections": ["Approach", "Outcomes"]
+    }
+  }
+}

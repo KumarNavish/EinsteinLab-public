@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "speech_recognition": {
+    "repository": "Systran/faster-whisper-base.en",
+    "revision": "3d3d5dee26484f91867d81cb899cfcf72b96be6c",
+    "directory": "whisper-base.en"
+  },
+  "language": {
+    "repository": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+    "revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+    "directory": "qwen3-4b",
+    "chat_template_sha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541"
+  },
+  "fast_voice": {
+    "repository": "rhasspy/piper-voices",
+    "revision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+    "directory": "en/en_GB/alan/medium",
+    "files": {
+      "en_GB-alan-medium.onnx": "0a309668932205e762801f1efc2736cd4b0120329622adf62be09e56339d3330",
+      "en_GB-alan-medium.onnx.json": "c0f0d124e5895c00e7c03b35dcc8287f319a6998a365b182deb5c8e752ee8c1e"
+    }
+  },
+  "expressive_voice": {
+    "repository": "thewh1teagle/kokoro-onnx",
+    "release": "model-files-v1.1",
+    "directory": "kokoro",
+    "voice": "bm_george",
+    "files": {
+      "kokoro-v1.0.int8.onnx": "ae315a79b623f244700e4afb9246c46a26066782e049ba174bf3ba433970ee9c",
+      "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+    }
+  },
+  "public_source_models": [
+    {
+      "repository": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "directory": "minilm",
+      "files": {
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "onnx/model_qint8_arm64.onnx": "4278337fd0ff3c68bfb6291042cad8ab363e1d9fbc43dcb499fe91c871902474"
+      }
+    },
+    {
+      "repository": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "directory": "reranker",
+      "files": {
+        "config.json": "380e02c93f431831be65d99a4e7e5f67c133985bf2e77d9d4eba46847190bacc",
+        "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+        "tokenizer_config.json": "a5c2e5a7b1a29a0702cd28c08a399b5ecc110c263009d17f7e3b415f25905fd8",
+        "onnx/model_qint8_arm64.onnx": "3573b6b9593cb2f75987a31815d409ca3dd8808629118fd20451bb1a5d90cec7"
+      }
+    }
+  ]
+}

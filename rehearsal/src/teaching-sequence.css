@@ -1,0 +1,43 @@
+#teaching-controls {
+  position: fixed;
+  z-index: 9;
+  top: 88px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(680px, 60vw);
+  padding: 10px 15px;
+  border: 1px solid #cbd4c8;
+  border-radius: 12px;
+  background: #f6f7f0;
+  color: #35513e;
+  font-size: 12px;
+}
+#teaching-controls[hidden] { display: none; }
+#teaching-step-label { flex: 1; line-height: 1.5; }
+#teaching-controls button { white-space: nowrap; }
+#teaching-controls button:disabled { opacity: .4; cursor: default; }
+#teaching-controls[data-mode=source]{z-index:25;max-width:min(930px,66vw);gap:10px;padding:8px 14px}
+@media(max-width:650px){#teaching-controls[data-mode=source]{max-width:none;z-index:25}}
+.progressive-teaching #read-diagram { top: auto; right: 32px; bottom: 125px; }
+#teaching-outline { display: none; }
+.diagram-text-list { padding-left: 22px; }
+.diagram-text-list li { margin: 0 0 18px; padding-left: 6px; }
+.diagram-text-list h3 { margin: 0 0 5px; font-size: 16px; line-height: 1.4; }
+.diagram-text-list p { margin: 0; font-size: 14px; line-height: 1.5; color: #586459; }
+.diagram-text-list .current-idea { color: #8b4b33; }
+@media (max-width: 650px) {
+  #teaching-controls { top: 84px; left: 12px; right: 12px; max-width: none; gap: 8px; padding: 9px 11px; font-size: 11px; }
+  #teaching-controls button { padding: 5px 3px; font-size: 11px; }
+  .progressive-teaching #stage { top: 137px; bottom: auto; height: 210px; }
+  .progressive-teaching #read-diagram { display: none; }
+  .progressive-teaching #teaching-outline:not([hidden]) { display: block; position: absolute; top: 354px; bottom: var(--presentation-floor,250px); left: 16px; right: 16px; overflow: auto; padding: 16px 18px; border-radius: 12px; background: #fafaf4; border: 1px solid #cbd4c8; }
+  #teaching-outline h2 { margin: 0 0 16px; font: 22px/1.2 Georgia, serif; }
+  #teaching-outline ol { margin: 0; }
+  .diagram-dialog[data-view=diagram] canvas { display: none; }
+}
+@media (max-width: 650px) and (max-height: 720px) {
+  .progressive-teaching #stage { height: 100px; }
+  .progressive-teaching #teaching-outline:not([hidden]) { top: 242px; }
+}

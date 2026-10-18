@@ -1,0 +1,3 @@
+-r ../../lab_backend/requirements-public.in
+gradio[oauth,mcp]==6.30.0
+spaces==0.51.3

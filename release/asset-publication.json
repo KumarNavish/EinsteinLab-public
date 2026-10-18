@@ -1,0 +1,17 @@
+{
+  "scope": "Operator authorization to publish the existing Einstein character for this application; not a copyright licence determination",
+  "authorized_on": "2026-10-16",
+  "source": "Direct user instructions in this launch conversation",
+  "instructions": [
+    "Please take the state of this project to the north star as per the attached prompt",
+    "Einstein is a public figure, we don't need anything",
+    "I want the complete Einstein app live and tested, not just a production candidate."
+  ],
+  "asset": {
+    "path": "rehearsal/public/assets/einstein.glb",
+    "bytes": 55079784,
+    "sha256": "0fdd4280d69169c93e69f3586b8956077223d1178523acc028b46c1b31ba89fc"
+  },
+  "publication_setting": "EINSTEIN_ASSET_DISTRIBUTION_APPROVED=true",
+  "provenance_limit": "No top-level source licence for these particular upstream CC4/iClone files was found. Preserve THIRD_PARTY_NOTICES.md; unrestricted downstream redistribution rights are not asserted."
+}

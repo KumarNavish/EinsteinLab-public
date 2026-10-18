@@ -1,0 +1,33 @@
+{
+  "scope": "Locally authored synthetic QA media plus the exact authorized public TraceMonkey source PDF. No remote model was used to prepare these files.",
+  "video": {
+    "file": "original-synthetic.webm",
+    "bytes": 29357,
+    "sha256": "8238f236cfe665349e860f2aa70ecc44f67c751e651b03cd50a79dc1ba29ae20",
+    "seconds": 6,
+    "width": 640,
+    "height": 360,
+    "audio": false,
+    "content": "Moving red square, fixed blue circle, burned frame index and original-source disclosure."
+  },
+  "microphone": {
+    "scope": "Authored synthetic microphone fixture; no human microphone or remote provider used to prepare it.",
+    "authoredText": "For this public test, please explain in one short sentence why a soap bubble is round. Then wait.",
+    "creation": "Installed local macOS speech engine, then ffmpeg; original authored PCM preserved byte for byte, with 70 seconds of zero PCM appended locally. Leading silence 1.5 seconds; trailing silence 120 seconds.",
+    "file": "authored-microphone.wav",
+    "bytes": 12265188,
+    "sha256": "bc5c37b378c3efb530cf848d7d83ae649ce7aa58b4e44484d543a3cbf153eb36",
+    "sampleRate": 48000,
+    "channels": 1,
+    "sampleWidthBytes": 2,
+    "seconds": 127.7615625
+  },
+  "pdf": {
+    "file": "tracemonkey-original.pdf",
+    "bytes": 1016315,
+    "sha256": "3662ff519e485810520552bf301d8c3b2b917fd2f83303f4965d7abed367e113",
+    "pages": 14,
+    "provenance": "Exact original fixture already used in the approved public source-v2 tests; copied without alteration from the owner-authorized local document. Packaged only in the existing private canonical repository for reproducible full acceptance.",
+    "source_url": "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
+  }
+}

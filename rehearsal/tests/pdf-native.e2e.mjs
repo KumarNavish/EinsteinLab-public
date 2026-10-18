@@ -1,0 +1,120 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const root = path.resolve('..'), out = path.join(root, 'evidence/runtime/c18/native-pdf-' + Date.now());
+await fs.mkdir(out, {recursive: true});
+const truth = JSON.parse(await fs.readFile(path.join(root, '.work/c18-documents/controlled-source-truth.json'), 'utf8'));
+const report = {scope: 'Real Gemini native conversation, real browser-selected PDF, original page pixels, real tool acknowledgements. The three-page input is an explicitly synthetic unknown visual-marker fixture, not a scientific paper or model-knowledge benchmark. No microphone is opened. The marker is not included in a prompt, file name, or extracted PDF text.', checks: [], errors: [], events: [], turns: []};
+const browser = await chromium.launch({channel: 'chrome', headless: true, args: ['--autoplay-policy=no-user-gesture-required']});
+const context = await browser.newContext({viewport: {width: 1440, height: 1000}, recordVideo: {dir: path.join(out, 'interface'), size: {width: 1440, height: 1000}}});
+const page = await context.newPage();
+page.on('pageerror', error => report.errors.push(error.message));
+page.on('websocket', socket => {
+  if (!socket.url().includes('/api/native/voice')) return;
+  socket.on('framereceived', ({payload}) => {
+    if (typeof payload !== 'string') return;
+    try {
+      const event = JSON.parse(payload);
+      if (event.event === 'audio') return;
+      if (['document_action','document_registered','document_inspected','work_activity','error','turn_complete'].includes(event.event)) {
+        report.events.push({...event, observedAt: Date.now()});
+      }
+    } catch {}
+  });
+});
+const check = (name, passed, extra = {}) => report.checks.push({name, passed, ...extra});
+async function waitTurn(afterCount, limit = 60000) {
+  await page.waitForFunction(count => window.__einstein.stats.nativeCompletedTurns > count, afterCount, {timeout: limit});
+  await page.waitForFunction(() => !window.__einstein.stats.audioPlaying && window.__einstein.player.entries.length === 0, {}, {timeout: 45000});
+  await page.waitForTimeout(250);
+  return page.evaluate(() => window.__einstein.stats.lastTurn);
+}
+async function ask(text) {
+  const count = await page.evaluate(() => window.__einstein.stats.nativeCompletedTurns || 0);
+  await page.evaluate(text => window.__einstein.native.sendText(text), text);
+  const result = await waitTurn(count);
+  report.turns.push({asked: text, response: result});
+  return result;
+}
+let capture = false;
+try {
+  let available = false;
+  for (let i = 0; i < 60; i++) {
+    try { const response = await context.request.get('http://127.0.0.1:8765/api/native/status', {timeout: 2500}); if (response.ok()) {
+      const status = await response.json();
+      if (status.active) throw new Error('An existing visitor is active; test must not interrupt it.');
+      if (!status.selected_pdf_tools?.includes('read_selected_pdf_page')) throw new Error('The running server has not loaded the new PDF contract.');
+      if (status.available) { available = true; report.providerStatus = {model: status.model, available: status.available}; break; }
+    }} catch (error) { if (error.message.includes('existing visitor') || error.message.includes('new PDF contract')) throw error; }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  if (!available) throw new Error('Native PDF service did not become available.');
+  await page.goto('http://127.0.0.1:8765/', {waitUntil: 'networkidle', timeout: 90000});
+  await page.waitForFunction(() => window.__einstein?.stats.avatarReady && window.__einstein.stats.nativeStatus?.available, {}, {timeout: 60000});
+  await page.locator('#paper-file').setInputFiles(path.join(root, '.work/c18-documents/controlled-source.pdf'));
+  await page.waitForFunction(() => window.__einstein.paper.pdf?.pageNumber === 1, {}, {timeout: 30000});
+  check('file_remains_local_before_approval', await page.evaluate(() => !window.__einstein.paper.approved && !window.__einstein.native.active));
+  await page.evaluate(async () => {
+    const {stage, player} = window.__einstein;
+    await player.activate();
+    const video = stage.renderer.domElement.captureStream(30);
+    const stream = new MediaStream([...video.getVideoTracks(), ...player.capture.stream.getAudioTracks()]);
+    const type = ['video/webm;codecs=vp8,opus','video/webm'].find(value => MediaRecorder.isTypeSupported(value));
+    const recorder = new MediaRecorder(stream, {mimeType: type, videoBitsPerSecond: 1300000, audioBitsPerSecond: 96000});
+    const chunks = []; recorder.ondataavailable = event => { if (event.data.size) chunks.push(event.data); };
+    window.__pdfCapture = {recorder, chunks, video}; recorder.start(250);
+  }); capture = true;
+  await page.locator('#paper-discuss').click();
+  const opening = await waitTurn(0);
+  report.turns.push({asked: 'Visitor selected Discuss this PDF; initial inspection request was generated by the UI.', response: opening});
+  check('provider_read_page_one', report.events.some(event => event.event === 'document_inspected' && event.page === 1));
+  check('file_is_explicitly_approved_for_current_session', await page.evaluate(() => window.__einstein.paper.approved));
+  const figure = await ask('Read page 2 of my selected PDF now. Describe the colored shape and copy the exact marker written to its right. The marker is in the image, not the extracted text. If you cannot see it, say so rather than guessing.');
+  check('actual_page_two_pixels_were_delivered', report.events.some(event => event.event === 'document_inspected' && event.page === 2));
+  check('unknown_raster_marker_read_correctly', figure.answer?.toUpperCase().includes(truth.marker), {expectedMarker: truth.marker, response: figure.answer});
+  check('visible_shape_color_is_correct', /purple|violet/i.test(figure.answer || ''));
+  const before = await page.evaluate(() => window.__einstein.paper.pdf.canvas.toDataURL('image/png'));
+  const marked = await ask('Place one ellipse annotation around the colored circle in the original figure on page 2. Use the full-page coordinates from the page you just inspected, then explain in one short sentence that the annotation does not alter the source image.');
+  check('real_model_annotation_acknowledged', report.events.some(event => event.event === 'work_activity' && event.tool === 'mark_selected_pdf' && event.status === 'page-annotated'));
+  const marks = await page.evaluate(() => window.__einstein.paper.marks.get(2) || []);
+  report.marks = marks;
+  check('annotation_target_overlaps_source_circle', marks.some(mark => {
+    const [x, y, w, h] = mark.region;
+    return x < .45 && x + w > .2 && y < .48 && y + h > .3;
+  }));
+  const after = await page.evaluate(() => window.__einstein.paper.pdf.canvas.toDataURL('image/png'));
+  check('model_annotation_did_not_change_original_pixels', before === after);
+  await page.screenshot({path: path.join(out, 'actual-pdf-annotation.png')});
+  const limitations = await ask('Now read page 3. What does this document explicitly say the test does not validate?');
+  check('followup_reads_correct_source_page', report.events.some(event => event.event === 'document_inspected' && event.page === 3));
+  check('source_limitation_retained', /scientific|expertise|knowledge/i.test(limitations.answer || ''));
+  await page.locator('#paper-remove').click();
+  await page.waitForFunction(() => !window.__einstein.stats.document.selected);
+  check('removal_revokes_local_file', await page.evaluate(() => !window.__einstein.paper.pdf && !window.__einstein.paper.approved));
+  await page.evaluate(() => window.__einstein.native.stop());
+  check('conversation_and_microphone_are_closed', await page.evaluate(() => !window.__einstein.native.active && !window.__einstein.stats.microphoneActive));
+  check('console_clean', report.errors.length === 0);
+} catch (error) {
+  report.failure = error.stack;
+  report.failureState = await page.evaluate(() => ({stats: window.__einstein?.stats, pageStatus: document.querySelector('#paper-status')?.textContent})).catch(() => null);
+  await page.screenshot({path: path.join(out, 'failure.png')}).catch(() => {});
+}
+if (capture) {
+  try {
+    const encoded = await page.evaluate(async () => {
+      const {recorder, chunks, video} = window.__pdfCapture;
+      await new Promise(resolve => { recorder.onstop = resolve; recorder.stop(); });
+      const bytes = new Uint8Array(await new Blob(chunks, {type: 'video/webm'}).arrayBuffer());
+      let binary = ''; for (let i = 0; i < bytes.length; i += 8192) binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+      video.getTracks().forEach(track => track.stop()); return btoa(binary);
+    });
+    await fs.writeFile(path.join(out, 'actual-avatar-and-pdf-dialogue.webm'), Buffer.from(encoded, 'base64'));
+    report.audioVideo = 'actual-avatar-and-pdf-dialogue.webm';
+    report.recordingScope = 'Actual 3D canvas plus real native audio. The DOM PDF viewer is visible in the separate silent full-interface recording, not in this canvas stream. Waiting time retained.';
+  } catch (error) { report.captureFailure = error.message; }
+}
+await page.evaluate(() => window.__einstein?.native.stop()).catch(() => {});
+const video = page.video(); await context.close(); report.interfaceVideo = await video.path(); await browser.close();
+await fs.writeFile(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
+console.log(JSON.stringify({directory: out, checks: report.checks, turns: report.turns, errors: report.errors, failure: report.failure}, null, 2));
+if (report.failure || report.checks.some(item => !item.passed)) process.exitCode = 1;

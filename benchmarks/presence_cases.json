@@ -1,0 +1,69 @@
+{
+  "scope": "Matched current-pipeline versus candidate checks on a new designed scenario set.\nNot a holdout, subjective voice score, or claim of general factual accuracy.\n",
+  "cases": [
+    {
+      "question": "What connects the work being done across this lab?",
+      "expected_title": "Front Page"
+    },
+    {
+      "question": "Tell me about using language models when a customer is mentally overloaded.",
+      "expected_title": "LLMs & Cognitive Load"
+    },
+    {
+      "question": "Why would somebody let an autonomous system choose their insurance?",
+      "expected_title": "Delegating to Agentic AI"
+    },
+    {
+      "question": "Can a person create a virtual scene by describing it aloud?",
+      "expected_title": "GenAI in VR"
+    },
+    {
+      "question": "Which researcher leads GenAI in VR?",
+      "expected_title": "GenAI in VR"
+    },
+    {
+      "question": "What does the website say about the scientific director?",
+      "expected_title": "About Us"
+    },
+    {
+      "question": "How is neck muscle activity used in relaxation exercises?",
+      "expected_title": "EMG for Relaxation"
+    },
+    {
+      "question": "What is being learned from brain signals during emotional interactions?",
+      "expected_title": "Neuromarkers for Emotion"
+    },
+    {
+      "question": "Is personalised neurofeedback connected to virtual reality?",
+      "expected_title": "Neurofeedback for Relaxation"
+    },
+    {
+      "question": "What did the study of young drivers and telematics actually find?",
+      "expected_title": "Telematics for Road Safety"
+    },
+    {
+      "question": "Explain augmented reality as a tool for learning data science together.",
+      "expected_title": "AR for Collaboration"
+    },
+    {
+      "question": "What constraints affect language-model recommendations for small businesses?",
+      "expected_title": "LLMs for SMEs"
+    },
+    {
+      "question": "What did the AI for Trust project learn about decision support?",
+      "expected_title": "AI for Trust"
+    },
+    {
+      "question": "How are transformers and appraisal theory used to recognise emotions?",
+      "expected_title": "Transformers for Emotion Recognition"
+    },
+    {
+      "question": "What is the project involving robots and physiological feedback?",
+      "expected_title": "Human Robot Interaction"
+    },
+    {
+      "question": "What has VR for Relaxation reported?",
+      "expected_title": "VR for Relaxation"
+    }
+  ]
+}

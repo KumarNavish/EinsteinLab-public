@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "repository": "KumarNavish/EinsteinLab",
+  "release_tag": "einstein-inputs-20261018-cache",
+  "release_id": 416636540,
+  "state": "published-and-verified",
+  "publication_receipt": "evidence/2026-10-18-source-cache/release-input-assets.json",
+  "assets": [
+    {
+      "name": "einstein.glb",
+      "asset_id": 654221382,
+      "path": "rehearsal/public/assets/einstein.glb",
+      "bytes": 55079784,
+      "sha256": "0fdd4280d69169c93e69f3586b8956077223d1178523acc028b46c1b31ba89fc",
+      "provenance": [
+        "release/asset-publication.json",
+        "evidence/2026-10-15-launch/avatar-transfer.json"
+      ],
+      "scope": "Exact approved optimized character derivative; original source textures and rig retained. Not a fresh Blender export."
+    },
+    {
+      "name": "lab.json",
+      "asset_id": 654221386,
+      "path": "lab_backend/data/lab.json",
+      "bytes": 412458,
+      "sha256": "b3189cdd6a6a0fbd9a8b6210519f739d314c2727f3f5b1fbcdfeb67c3d907969",
+      "snapshot_fetched_at": "2026-10-18T18:44:49.856069+00:00",
+      "pages": 120,
+      "provenance": [
+        "lab_backend/ingest.py",
+        "evidence/2026-10-18-source-cache/README.md"
+      ],
+      "scope": "Frozen official public ETH lab HTML snapshot; linked papers were not ingested. No crawl during deployment."
+    }
+  ]
+}

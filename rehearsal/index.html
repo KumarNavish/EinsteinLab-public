@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ecebe5">
+  <meta name="description" content="A source-grounded conversation with an Einstein-inspired digital host at the Mobiliar Lab.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%2327312d%22/%3E%3Ctext x=%2232%22 y=%2247%22 text-anchor=%22middle%22 font-family=%22Georgia%22 font-size=%2248%22 fill=%22%23ecebe5%22%3EE%3C/text%3E%3C/svg%3E">
+  <meta property="og:title" content="Einstein · Bring your curiosity">
+  <meta property="og:description" content="An Einstein-inspired research companion for conversation, papers, and scientific explanations.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Einstein · Bring your curiosity">
+  <meta name="twitter:description" content="An Einstein-inspired research companion.">
+  <meta name="twitter:image" content="/social-card.png">
+  <title>Einstein · Mobiliar Lab</title>
+</head>
+<body>
+<div id="app">
+  <main id="experience" aria-label="A conversation with an Einstein-inspired research host">
+    <div id="stage" aria-label="Animated Einstein character"></div>
+    <div class="topline">
+      <a class="wordmark" href="/" aria-label="Einstein home">Einstein<span>A conversation across time</span></a>
+      <div class="top-actions"><span class="labmark">Mobiliar Lab <span>ETH Zürich</span></span>
+        <button id="settings-toggle" class="icon-button" aria-label="Conversation settings" title="Conversation settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16M9 5v6M15 13v6"/></svg></button>
+      </div>
+    </div>
+    <aside id="source-recovery" hidden aria-label="Continue after reload"><span>If you were exploring a document, re-select it to continue. Files and conversations are not restored after reload.</span><button id="source-recovery-open" type="button">Choose material</button><button id="source-recovery-dismiss" type="button" aria-label="Dismiss reload guidance">Dismiss</button></aside>
+    <div id="asset-state" role="status">Preparing Albert’s presence…</div>
+    <section class="invitation welcome" id="invitation" aria-label="Begin the experience">
+      <h1>Bring your<br><em>curiosity.</em></h1>
+      <p>A familiar mind.<br>A new conversation.</p>
+      <button id="introduction" class="text-button">Let Albert introduce the lab <span aria-hidden="true">↗</span></button>
+    </section>
+    <article id="written-answer" aria-labelledby="written-answer-heading" hidden>
+      <div class="written-heading"><h2 id="written-answer-heading">Thinking together</h2><button id="written-close" type="button" class="view-control" aria-label="Hide written answer">Hide</button></div>
+      <p id="written-question"></p><div id="written-content" tabindex="0" aria-label="Written answer"></div><p id="written-status" role="status"></p>
+    </article>
+    <button id="written-open" type="button" class="view-control" hidden>Read the answer</button>
+    <div class="caption-region" aria-live="polite" aria-atomic="true"><p id="live-caption"></p></div>
+    <div class="conversation-dock">
+      <div class="presence-status"><span class="status-orbit" aria-hidden="true"></span><span id="state" data-state="ready">A question is a good beginning.</span></div>
+      <div class="main-controls">
+        <button id="keyboard-toggle" class="icon-button" aria-label="Type a question" title="Type a question"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M7 10h.01M11 10h.01M15 10h.01M18 10h.01M7 14h10"/></svg></button>
+        <button id="microphone" class="conversation-button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span id="microphone-label">Begin a conversation</span></button>
+        <button id="interrupt" class="icon-button stop-control" aria-label="Interrupt Albert" title="Interrupt Albert"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg></button>
+      </div>
+      <button id="source-toggle" class="source-peek" aria-expanded="false" hidden>Research notes</button>
+    </div>
+    <aside id="web-search-suggestions" class="web-search-suggestions" aria-label="Web search suggestions" hidden></aside>
+    <footer class="quiet-footer"><span>Synthetic portrayal. Real research.</span><button id="material-toggle" type="button" class="view-control" popovertarget="material-menu">Bring material <span aria-hidden="true">＋</span></button><button id="feedback-toggle" class="view-control">Feedback</button></footer>
+    <div id="material-menu" popover aria-label="Bring material"><p>Something to explore together.</p><div id="material-actions"></div></div>
+  </main>
+  <dialog id="question-dialog" class="sheet question-sheet" aria-labelledby="question-heading">
+    <div class="sheet-heading"><h2 id="question-heading">What are you curious about?</h2><button class="icon-button" data-close aria-label="Close question entry">×</button></div>
+    <form id="question-form"><label class="sr-only" for="question">Your question</label><textarea id="question" maxlength="700" rows="3" placeholder="Ask about a project, an idea, or a connection…"></textarea><label class="reply-choice" for="reply-mode">Albert’s reply<select id="reply-mode"><option value="text">Read the answer</option><option value="voice">Hear his voice</option></select></label><p id="reply-mode-note" class="privacy-note">Written answers work without microphone or audio setup.</p><p id="question-context" class="privacy-note" role="status">Ask freely, or open material to explore it together.</p><button id="send" class="send-button" aria-label="Send question" type="submit">Ask Albert <span aria-hidden="true">↗</span></button></form>
+    <div class="suggestions"><button data-question="How do LLMs affect cognitive load?">Cognitive load</button><button data-question="What does the lab investigate about delegating decisions to agentic AI?">Decisions & AI</button><button data-question="What does the GenAI in VR project investigate?">Generative worlds</button></div>
+  </dialog>
+  <dialog id="evidence-dialog" class="sheet evidence-sheet" aria-labelledby="evidence-heading">
+    <div class="sheet-heading"><h2 id="evidence-heading">Behind the conversation</h2><button class="icon-button" data-close aria-label="Close research notes">×</button></div>
+    <p class="sheet-intro">Public research, with its uncertainties left intact.</p><p id="research-status" role="status"></p>
+    <section id="task-notes" hidden><h3 id="task-goal">Task notes</h3><p class="privacy-note">A plan is not completed work. The activity below records the tools that actually ran. Drafts have not been sent or published.</p><ol id="task-plan"></ol><div id="task-activity" aria-live="polite"></div><div id="task-drafts"></div></section>
+    <section id="source-box" hidden><div id="sources" hidden></div></section>
+    <details class="conversation-history"><summary>Conversation transcript</summary><div id="transcript" aria-live="off"></div></details>
+  </dialog>
+  <dialog id="settings-dialog" class="sheet settings-sheet" aria-labelledby="settings-heading">
+    <div class="sheet-heading"><h2 id="settings-heading">Make yourself comfortable.</h2><button class="icon-button" data-close aria-label="Close settings">×</button></div>
+    <label class="setting-row" for="conversation-engine"><span>Conversation</span><select id="conversation-engine"><option value="local">Local · stays on this Mac</option><option value="native">Configured voice provider</option></select></label>
+    <p id="native-status" class="privacy-note">Checking the configured conversation service.</p>
+    <p class="privacy-note" id="web-capability">Checking the configured conversation and evidence services.</p>
+    <details id="native-setup" class="diagnostics" hidden>
+      <summary>Set up the verified free-tier voice</summary>
+      <p class="privacy-note">Use the existing key from the project whose Free Tier status was checked in Google AI Studio. Do not enable billing. The key stays in a private file on this Mac and is never sent to the webpage after saving.</p>
+      <form id="native-key-form" autocomplete="off">
+        <label for="native-key">Existing free-tier API key</label>
+        <input id="native-key" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="100" placeholder="Paste locally here, never into the chat" required>
+        <label class="native-consent"><input id="native-consent" type="checkbox" required><span>I approve sending microphone audio and public lab context to Google. Free-tier content may be used to improve Google products.</span></label>
+        <button id="native-save" type="submit" class="secondary-button">Save privately on this Mac</button>
+      </form>
+      <p id="native-config-message" role="status"></p>
+    </details>
+    <label class="setting-row" for="sound"><span>Spoken answers</span><input id="sound" type="checkbox" checked></label>
+    <label class="setting-row" for="captions"><span>Captions</span><input id="captions" type="checkbox" checked></label>
+    <div class="setting-row"><span>View</span><div><button id="portrait" class="view-control">Closer</button><button id="fullbody" class="view-control">Full presence</button></div></div>
+    <label class="setting-row" data-native-control for="native-voice" hidden><span>Einstein’s voice</span><select id="native-voice"><option value="">Checking configured voices…</option></select></label>
+    <label class="setting-row" data-native-control for="native-accent"><span>English delivery</span><select id="native-accent"><option value="german">German-accented English</option><option value="original">Original voice</option></select></label>
+    <p id="native-voice-note" class="privacy-note" data-native-control hidden>The selected native voice is used on the next connection. No pitch shifting or replacement voice is applied.</p>
+    <button id="preview-voice" class="secondary-button" data-native-control hidden>Hear this voice</button>
+    <label class="setting-row" data-local-control for="voice-mode"><span>Voice</span><select id="voice-mode"><option value="expressive">George · expressive</option><option value="fast">Alan · lighter</option></select></label>
+    <label class="setting-row" data-local-control for="evidence-only"><span>Read direct source excerpts</span><input id="evidence-only" type="checkbox"></label>
+    <label class="setting-row" for="public-web"><span id="public-web-label">Public web research</span><input id="public-web" type="checkbox"></label>
+    <p id="public-web-note" class="privacy-note">Optional public search and webpage reading. The configured processing provider is shown before a conversation starts.</p>
+    <p class="privacy-note">Einstein can plan research, calculate, inspect sources and draft a downloadable note. Sending, publishing, purchases, machine commands and account changes are not available.</p>
+    <button id="xr" class="secondary-button" disabled>Mixed reality requires a compatible headset</button>
+    <p id="voice-processing-note" class="privacy-note">Voice conversation keeps the microphone open until you end it. Processing details are shown before you begin. This service does not save microphone audio. Headphones are recommended.</p>
+    <details class="diagnostics"><summary>Technical details</summary><p id="health">Checking the local runtime</p><p id="coverage">Checking public research coverage</p><p id="measurement">No conversation has started.</p><p id="render-stats"></p><p id="audio-diagnostics">Continuous audio buffering and narrow-band tone protection enabled.</p><p>Physical headset acceptance remains unverified.</p></details>
+  </dialog>
+  <dialog id="feedback-dialog" class="sheet settings-sheet" aria-labelledby="feedback-heading">
+    <div class="sheet-heading"><h2 id="feedback-heading">How did it feel?</h2><button class="icon-button" data-close aria-label="Close feedback">×</button></div>
+    <p class="privacy-note">Your feedback is private. Only these form fields are saved—not microphone audio or the conversation transcript.</p>
+    <form id="feedback-form">
+      <label class="setting-row">Overall experience<select name="rating" required><option value="">Choose a rating</option><option value="5">5 · Excellent</option><option value="4">4 · Good</option><option value="3">3 · Mixed</option><option value="2">2 · Poor</option><option value="1">1 · Did not work</option></select></label>
+      <label class="setting-row">Avatar realism<select name="realism"><option value="">Not rated</option><option value="5">5 · Convincing</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1 · Unconvincing</option></select></label>
+      <label class="setting-row">Voice naturalness<select name="voice"><option value="">Not rated</option><option value="5">5 · Natural</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1 · Unnatural</option></select></label>
+      <label class="setting-row">Feedback type<select name="kind"><option value="impression">Experience</option><option value="bug">Something broke</option><option value="suggestion">Suggestion</option></select></label>
+      <label for="feedback-message">What should we know?</label><textarea id="feedback-message" name="message" maxlength="2000" rows="3" placeholder="What felt useful, confusing, or unnatural?"></textarea>
+      <label for="feedback-context">What were you trying to do? <span class="privacy-note">Optional</span></label><textarea id="feedback-context" name="context" maxlength="1000" rows="2"></textarea>
+      <label class="feedback-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button id="feedback-send" type="submit" class="send-button">Send private feedback</button>
+      <p id="feedback-result" role="status"></p>
+    </form>
+  </dialog>
+  <div id="error" class="error-toast" role="alert" hidden><span><span id="error-message"></span> <button id="native-status-retry" type="button" hidden>Check again</button> <button id="ask-in-writing" type="button" hidden>Ask in writing</button></span><button id="error-dismiss" type="button" aria-label="Dismiss message">Dismiss</button></div>
+</div>
+<script type="module" src="/src/presence-entry.js"></script>
+<script type="module" src="/src/feedback-ui.js"></script>
+<script type="module" src="/src/presentation-layout.js"></script>
+</body>
+</html>

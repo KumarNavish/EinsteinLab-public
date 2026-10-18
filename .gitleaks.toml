@@ -1,0 +1,30 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Tokenizer file SHA256 entries in the reproducible model manifest"
+condition = "AND"
+paths = ['''(^|/)lab_backend/models\.lock\.json$''']
+regexTarget = "line"
+regexes = ['''"tokenizer(_config)?\.json":\s*"[a-f0-9]{64}"''']
+
+[[allowlists]]
+description = "Public Einstein app identifier, not the deployment credential"
+condition = "AND"
+paths = ['''(^|/)\.github/workflows/manual-deploy\.yml$''']
+regexTarget = "line"
+regexes = ['''^\s*FASTAPI_CLOUD_APP_ID: f0faed3c-f408-4423-85bd-e33589d42314\s*$''']
+
+[[allowlists]]
+description = "Public deploy-token record identifier; its secret value is excluded"
+condition = "AND"
+paths = ['''(^|/)evidence/2026-10-16-ci/deploy-token-configuration\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"token_id": "ff483bd7-5cec-4455-9ed0-947a5f0ec56a",?\s*$''']
+
+[[allowlists]]
+description = "Archive source hashes for the credential-free ignore file"
+condition = "AND"
+paths = ['''(^|/)evidence/2026-10-15-launch/fastapicloud-native-fixed\.json$''', '''(^|/)evidence/2026-10-15-launch/fastapicloud-native-probe-source\.zip!source-sha256\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"\.fastapicloudignore": "[a-f0-9]{64}",?\s*$''']

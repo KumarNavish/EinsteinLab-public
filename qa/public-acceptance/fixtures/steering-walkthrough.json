@@ -1,0 +1,51 @@
+{
+  "fixture": "qa/public-acceptance/fixtures/steering-walkthrough.pptx",
+  "bytes": 42904,
+  "sha256": "d979e97fad001a8ab06a6461e8033b523937193009bc19db891ee7d39b8878ca",
+  "validated_slides": 2,
+  "synthetic": true,
+  "slide_1": {
+    "title": "Representative deck: chart + source link",
+    "diagram": "Input -> Outcome",
+    "chart": {
+      "A": 2,
+      "B": 5
+    },
+    "citation": "https://ethz.ch/en.html",
+    "source_parts_preserved": true
+  },
+  "slide_2": {
+    "title": "Dose-response mechanism",
+    "diagram": "Dose -> Response",
+    "chart_units": "a.u. (arbitrary units)",
+    "chart": {
+      "Control": 3,
+      "Treatment": 7
+    },
+    "visible_labels": [
+      "Control: 3 a.u.",
+      "Treatment: 7 a.u.",
+      "Synthetic difference: +4 a.u."
+    ],
+    "disclosure": "Synthetic compatibility fixture. Values are test data; no research result is asserted."
+  },
+  "expected_navigation": [
+    1,
+    2,
+    1
+  ],
+  "old_fixture_sha256_unchanged": "f7a091861d7727afaec86c2203f32429d066f27e50499b6b5e9cf091e819d62d",
+  "verification": "ZIP/XML and production validate_pptx preserve 2 slides. Namespace-only candidate passed actual confined Mac conversion and native pdfinfo 2-page validation. Linux CI and public slide acceptance remain pending.",
+  "namespace_interoperability_repair": {
+    "baseline_sha256": "dacb03284145a20502b6520e1bc3d95904288d8912bea1182a41a00c93a2ef1f",
+    "baseline_git_commit": "dcea894",
+    "changed_parts": [
+      "[Content_Types].xml",
+      "ppt/_rels/presentation.xml.rels"
+    ],
+    "semantic_xml_equal": true,
+    "other_parts_byte_identical": 44,
+    "embedded_workbooks_byte_identical": 2,
+    "receipt": "evidence/2026-10-17-openai/namespace-conversion-investigation.json"
+  }
+}

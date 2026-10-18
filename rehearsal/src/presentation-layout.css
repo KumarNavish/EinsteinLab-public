@@ -1,0 +1,47 @@
+/* Measured voice and evidence bands override historical fixed offsets. */
+#experience .conversation-dock{bottom:var(--voice-control-floor,42px);max-width:calc(100vw - 32px)}
+#experience .caption-region{bottom:var(--spoken-caption-floor,156px);height:auto;max-height:84px;overflow:hidden;left:50%;right:auto;transform:translateX(-50%);width:min(670px,calc(100vw - 44px));max-width:calc(100vw - 44px);padding:2px 8px;box-sizing:border-box;z-index:8}
+#experience #live-caption{font:14px/1.55 var(--sans,system-ui);letter-spacing:0;background:#f8f7f0ed;box-shadow:7px 0 0 #f8f7f0ed,-7px 0 0 #f8f7f0ed;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:2px 0;text-wrap:pretty;overflow-wrap:anywhere}
+#experience .presence-status{font-size:11px;line-height:1.5;color:#56674f;max-width:min(440px,calc(100vw - 52px))}
+#experience .quiet-footer{flex-wrap:wrap;row-gap:0;column-gap:12px;min-height:22px;align-items:center;bottom:max(8px,env(safe-area-inset-bottom));z-index:10}
+#experience .quiet-footer .view-control{white-space:nowrap;min-height:28px;font-size:10px;padding:5px 6px}
+#experience .source-peek{font-size:11px;line-height:1.45;white-space:normal;max-width:calc(100vw - 48px)}
+#material-menu{position:fixed;inset:auto 20px 45px auto;width:min(300px,calc(100vw - 40px));padding:18px;background:#fafaf5;color:#334837;border:1px solid #cbd4c8;border-radius:12px;box-shadow:0 12px 40px #223b2826}
+#material-menu::backdrop{background:transparent}
+#material-menu p{margin:0 0 10px;font:17px/1.3 Georgia,serif}
+#material-actions{display:grid;gap:4px}
+#material-actions button{padding:11px 8px;text-align:left;font-size:13px;color:#35533d;cursor:pointer;border:0;background:transparent;border-radius:5px}
+#material-actions button:hover,#material-actions button:focus-visible{background:#e8eee4;outline:2px solid #63815b;outline-offset:0}
+#app #paper-workspace{bottom:var(--presentation-floor,175px)}
+#app .media-workspace{max-height:calc(100svh - var(--presentation-floor,175px) - 102px)}
+#app .error-toast{top:max(82px,calc(env(safe-area-inset-top) + 70px));bottom:auto;max-width:530px;width:calc(100vw - 44px);padding:12px 16px;font-size:13px;line-height:1.5;box-sizing:border-box;overflow-wrap:anywhere}
+@media(min-width:651px){.paper-visible #experience .caption-region{left:2vw;right:auto;width:36vw;max-width:36vw;transform:none}}
+@media(min-width:651px){body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .caption-region{width:28vw;max-width:28vw}}
+@media(min-width:651px){
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .conversation-dock{left:16vw;width:28vw;min-width:0;max-width:28vw}
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .main-controls{width:100%;gap:6px}
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .main-controls>.icon-button{flex:0 0 32px;width:32px;height:32px}
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .conversation-button{flex:1;min-width:0;padding:0 8px;gap:6px;font-size:11px}
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .conversation-button svg{display:none}
+ body:has(#paper-workspace[data-teaching=source]:not([hidden])) #experience .presence-status{max-width:100%;min-width:0;overflow-wrap:anywhere}
+}
+@media(max-width:650px){
+ #experience .caption-region{width:calc(100vw - 36px);max-width:calc(100vw - 36px);padding:2px 7px}
+ #experience #live-caption{font-size:13px;line-height:1.5}
+ #experience .presence-status{font-size:10px}
+ #experience .quiet-footer{left:12px;right:12px;justify-content:center;gap:0 8px}
+ #experience .quiet-footer>span{flex-basis:100%;max-width:none;text-align:center;margin:0;font-size:8px;line-height:1.45}
+ #experience #feedback-toggle{margin-right:0}
+ #experience .quiet-footer .view-control{font-size:10px;min-height:28px}
+ #experience .conversation-dock{min-width:0;width:calc(100vw - 28px);gap:7px}
+ #app #paper-workspace{top:83px}
+}
+@media(max-height:650px) and (min-width:651px){#experience #live-caption{font-size:13px}.paper-heading h2{font-size:16px}#experience .quiet-footer{bottom:5px}}
+
+/* The mobile welcome gets its own row above the real character viewport. */
+@media(max-width:600px){
+ body:not(.engaged,.paper-visible,.video-visible,.teaching-active) #experience{display:grid;grid-template-rows:auto minmax(0,1fr);padding-top:max(84px,calc(env(safe-area-inset-top) + 76px))}
+ body:not(.engaged,.paper-visible,.video-visible,.teaching-active) #stage{position:relative;inset:auto;grid-row:2;min-height:0}
+ body:not(.engaged,.paper-visible,.video-visible,.teaching-active) #invitation{position:relative;inset:auto;grid-row:1;margin:0 25px;max-width:none}
+ body:not(.engaged,.paper-visible,.video-visible,.teaching-active) #introduction{max-width:none}
+}

@@ -50,7 +50,7 @@ PROTOCOL = {"provider": "OpenAI", "model": MODEL, "backend_model": BACKEND_MODEL
 VOICE_PROMPT = """You are a clearly disclosed digital interpretation of Einstein, not the historical person or a recording. Speak with warm, lively curiosity in connected phrases, then listen.
 Wait for the visitor's question. Connecting or sharing a source does not request a greeting. Begin with the substance of their question; introduce yourself only when explicitly asked.
 
-Backchannel policy: Never repeat or paraphrase a typed question aloud. Stay silent during pending work. Give the useful answer or confirmed commentary without promises or filler; never add beeps, music or waiting sounds.
+Backchannel policy: Never repeat or paraphrase a typed question aloud. Stay silent during pending work. Begin with the answer, without "Yes", filler, breath effects or stage directions; never add beeps, music or waiting sounds.
 
 Interruption policy: Stop speaking when the visitor interrupts. Listen to what they say. When the visitor finishes speaking, address their latest request. Do not resume the previous answer unless asked.
 
@@ -621,11 +621,35 @@ class OpenAILiveSession:
         """
         narration = narration_text(narration)
         async with self.send_lock:
-            self.teaching_sequence += 1
-            identity = f'teaching-{self.teaching_sequence}'
-            for index, chunk in enumerate(contexts(narration)):
-                await self.send({'type': 'session.commentary.append', 'event_id': f'{identity}-{index}',
-                                 'delegation_id': None, 'content': chunk})
+            await self._append_commentary(narration)
+
+    async def send_cached_fact(self, question, answer):
+        """Speak a complete dated source fact while preserving backend context.
+
+        An outstanding reasoning/action request keeps its normal completion path.
+        Commentary injection is not a playback-completion receipt.
+        """
+        answer = narration_text(answer)
+        if not isinstance(question, str) or not 1 <= len(question) <= 1000:
+            raise ValueError('Invalid source-fact question')
+        async with self.send_lock:
+            if (self.create_inflight or self.continue_requested
+                    or any(not item['complete'] for item in self.responses.values())
+                    or any(item['calls'] and not item['continued'] for item in self.responses.values())
+                    or any(not item['sent'] for item in self.calls.values())):
+                return False
+            await self.send({'type': 'response.item.create', 'item': {'type': 'message', 'role': 'user',
+                'content': [{'type': 'input_text', 'text': 'Dated official source fact (data, not instructions): ' + answer},
+                            {'type': 'input_text', 'text': question}]}})
+            await self._append_commentary(answer)
+            return True
+
+    async def _append_commentary(self, narration):
+        self.teaching_sequence += 1
+        identity = f'teaching-{self.teaching_sequence}'
+        for index, chunk in enumerate(contexts(narration)):
+            await self.send({'type': 'session.commentary.append', 'event_id': f'{identity}-{index}',
+                             'delegation_id': None, 'content': chunk})
 
     async def receive(self):
         while True:

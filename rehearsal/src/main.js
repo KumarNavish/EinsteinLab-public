@@ -1,6 +1,6 @@
 import './style.css';
 import './teaching-sequence.css';
-import {LiveCaptions} from './live-captions.js';
+import {LiveCaptions, spokenWords} from './live-captions.js';
 import {EinsteinStage} from './scene.js';
 import {SpatialBoard} from './spatial-board.js';
 import {clearPresentationFocus} from './embodied-attention.js';
@@ -419,7 +419,7 @@ function appendTurn(question, answer, mode) {
   const article = document.createElement('article'); article.className = 'turn';
   const q = document.createElement('p'); q.className = 'user-question'; q.textContent = question;
   const who = document.createElement('p'); who.className = 'speaker'; who.textContent = 'ALBERT';
-  const p = document.createElement('p'); p.className = 'answer'; p.textContent = answer;
+  const p = document.createElement('p'); p.className = 'answer'; p.textContent = mode === 'native-audio' ? spokenWords(answer) : answer;
   const label = document.createElement('small'); label.className = 'mode';
   label.textContent = mode === 'native-text' ? 'Written conversation · source actions confirmed in the viewer' : mode === 'native-audio' ? `Voice conversation · ${stats.nativeProvider || processingProvider(nativeStatus)} ${stats.nativeModel || ''}${native.continuousAudio ? ' · local playback pause' : ''}` : mode === 'prepared-introduction' ? 'Prepared opening · authored, not a historical quotation' :
     mode === 'reviewed-research-note' ? 'Reviewed research note · source snapshot verified, not live generation' : mode === 'source-fact' ? 'Fact stated in the public source' : mode === 'local-synthesis' ? 'Generated explanation · evidence checks applied' :
@@ -437,6 +437,11 @@ function showSources(sources) {
   $('#source-toggle').setAttribute('aria-expanded', 'false');
   const pages = new Set(sources.map(source => source.url || source.document_id + ':p' + source.page)).size;
   $('#source-toggle').textContent = `Research notes · ${pages} source page${pages === 1 ? '' : 's'}`;
+  if (pages === 1 && sources[0]?.source_kind === 'cached-official-lab') {
+    const date = new Date(sources[0].fetched_at);
+    const title = sources[0].section === 'Our Team' ? 'Lab team page' : sources[0].title;
+    if (title && Number.isFinite(date.getTime())) $('#source-toggle').textContent = `From: ${title} · ${date.toLocaleDateString('en-GB', {day:'numeric',month:'short'})}`;
+  }
   for (const source of sources) {
     const article = document.createElement('article');
     const link = document.createElement('a'); link.textContent = source.title;

@@ -1,9 +1,19 @@
 /** Keep the current spoken clause readable; the complete answer stays in history.
  * This is a display window, not a summary, paraphrase, or semantic rewrite.
  */
-export function captionWindow(text, maxCharacters = 112) {
+export function spokenWords(text) {
   if (typeof text !== 'string') return '';
-  const clean = text.replace(/\s+/g, ' ').trim();
+  // Provider performance tags are not spoken words or scientific notation.
+  // Hold a split tag until it completes; preserve raw text in the transcript.
+  const tags = ['inhale', 'inhales', 'exhale', 'exhales', 'sigh', 'sighs', 'laugh', 'laughs', 'chuckle', 'chuckles', 'cough', 'coughs', 'gasp', 'gasps', 'breath', 'breaths', 'pause', 'pauses'];
+  let words = text.replace(/\[(?:inhales?|exhales?|sighs?|laughs?|chuckles?|coughs?|gasps?|breaths?|pauses?)\]/gi, '');
+  const partial = words.match(/\[([a-z]*)$/i);
+  if (partial && tags.some(tag => tag.startsWith(partial[1].toLowerCase()))) words = words.slice(0, partial.index);
+  return words.replace(/\s+/g, ' ').trim();
+}
+
+export function captionWindow(text, maxCharacters = 112) {
+  const clean = spokenWords(text);
   // Keep hesitation in the complete transcript, without leaving a bare
   // placeholder on screen while an evidence tool is still working.
   if (/^(?:m*h+m+|u+m+|uh|er)[.!?,…\s]*$/iu.test(clean)) return '';

@@ -1,6 +1,6 @@
 {
-  "source_commit": "3c8f9130b1f1111fcff8f3dcf171722bec320534",
-  "scope": "Independent public webapp source snapshot; no development history, original Unity assets, private owner logs, credentials or generated recordings. Original deployment remains separate.",
+  "source_commit": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
+  "scope": "Independent public webapp source snapshot. Updated source files use Git blob SHA-1 pins; unchanged original snapshot files retain SHA256 pins. No development history, original Unity assets, owner logs, credentials or private session recordings. Deployment and live acceptance are separate.",
   "excluded_upstream_lfs_assets": [
     "tools/Albert Einstein rigify.blend"
   ],
@@ -139,7 +139,7 @@
     },
     {
       "path": "lab_backend/openai_live.py",
-      "sha256": "836f5fd4abda1e5d22ddb8b930844c978005c7d293fce54e9554fd683f785b33"
+      "git_blob_sha": "f9a44286a4143f6ed33bc52265a887da58499cd0"
     },
     {
       "path": "lab_backend/__init__.py",
@@ -167,7 +167,7 @@
     },
     {
       "path": "lab_backend/native_knowledge.py",
-      "sha256": "a2babe7273390b97afdfbafe7df8600239ed77cbc6485653c49235d92b6e4497"
+      "git_blob_sha": "d49f493fd001b8446c81ef4a749eafc1f00f0f19"
     },
     {
       "path": "lab_backend/presentation.py",
@@ -251,7 +251,7 @@
     },
     {
       "path": "lab_backend/native_live.py",
-      "sha256": "cb9bc5678363aabf7132b6204120bb83d6de25d18f1def150df97cf207d6a112"
+      "git_blob_sha": "b8d17f69069f6de5e01fd66288ff6b329174408e"
     },
     {
       "path": "lab_backend/video_bridge.py",
@@ -587,7 +587,7 @@
     },
     {
       "path": "lab_backend/tests/test_native_lab_cache.py",
-      "sha256": "a9eee3a1f87ec8e295141b8087f4936f0364f2de4fb82c6bc4d0a9c5b7817086"
+      "git_blob_sha": "fa2cec7955491744c0b01639eb052bfaa0c02459"
     },
     {
       "path": "lab_backend/tests/test_public_transport.py",
@@ -599,7 +599,7 @@
     },
     {
       "path": "lab_backend/tests/test_openai_live.py",
-      "sha256": "6b4e572813cf43be0b218f2f51ee612dde31fa4ebf8c0775b0d06cbfa0967ed0"
+      "git_blob_sha": "c92d3335c74843a4e125f5983a6d2dcfe521cf3f"
     },
     {
       "path": "lab_backend/tests/test_local_documents.py",
@@ -615,7 +615,7 @@
     },
     {
       "path": "lab_backend/tests/test_native_knowledge.py",
-      "sha256": "ace33a1e1ec40a1a170c22d3365d98b135c5c25ca7250117f5cf09e5e797481e"
+      "git_blob_sha": "0d7412b6f4bae47f1857dd213de28a9ebd327e51"
     },
     {
       "path": "lab_backend/tests/test_audio.py",
@@ -1111,7 +1111,7 @@
     },
     {
       "path": "rehearsal/tests/live-captions.test.js",
-      "sha256": "3a1e8b5ec56f77a210823e6702a0751e73ff44a87618713c605e513f4b27496d"
+      "git_blob_sha": "2626dd378ffb40f4c098d8019c93dadc570ca404"
     },
     {
       "path": "rehearsal/tests/paper-retrieval.e2e.mjs",
@@ -1183,7 +1183,7 @@
     },
     {
       "path": "rehearsal/src/presentation-layout.js",
-      "sha256": "8a5aec3d7a6e5abda9cc8dee9e5d8368f491e5c642778f18078b9277af69f7fa"
+      "git_blob_sha": "b114d1edc933d5030aae5ab6f1f81717d5e8f22a"
     },
     {
       "path": "rehearsal/src/presence-entry.js",
@@ -1199,7 +1199,7 @@
     },
     {
       "path": "rehearsal/src/live-captions.js",
-      "sha256": "171e4850a63624f5b18aac72ae6126e118870df21593bc527d113e5c0145a120"
+      "git_blob_sha": "9d2f4de2dc063b60660918ceec141a145817e397"
     },
     {
       "path": "rehearsal/src/presentation-upload.js",
@@ -1235,7 +1235,7 @@
     },
     {
       "path": "rehearsal/src/main.js",
-      "sha256": "d22486b811252436acfd25e2720eb5cd349c5a1ed40104b8d467309a237db54d"
+      "git_blob_sha": "aa777b8182157fc311bc2dc4245e5464b919334d"
     },
     {
       "path": "rehearsal/src/paper-retrieval.js",
@@ -1251,7 +1251,7 @@
     },
     {
       "path": "rehearsal/src/style.css",
-      "sha256": "9c50c5e714227377537df765ae095cd53b0f83ebc8f50ce2b4de59a545384df6"
+      "git_blob_sha": "add820fa7696309446081f5b86bbfc129ac3f845"
     },
     {
       "path": "rehearsal/src/scheduled-speech-queue.js",
@@ -1283,7 +1283,7 @@
     },
     {
       "path": "rehearsal/src/presentation-layout.css",
-      "sha256": "3a300942440fa89c04878cd73767fab520fde76070473f8f978c8297f96fd08a"
+      "git_blob_sha": "c3fc2dddbdffb6f7abff7452525b3163a9ab6333"
     },
     {
       "path": "rehearsal/src/character-materials.js",
@@ -1436,6 +1436,10 @@
     {
       "path": "feedback-collection/functions/receive-feedback.mjs",
       "sha256": "46c8806ce7ab469bbc3153afb04a63827654881196b2e517c47c9e8be931da8c"
+    },
+    {
+      "path": "docs/OPUS_CONVERGENCE_PLAN.md",
+      "git_blob_sha": "2ab14870c355a2ed818d9dd4d0d1a66715dd62ad"
     }
   ]
 }

@@ -162,6 +162,9 @@ class NativeKnowledge:
         if re.search(r'\b(current|currently|latest|today|now|recent|refresh|recheck|verify|updated|changed|private|secret|password|payroll|unpublished|confidential)\b', query):
             return None
         sources = []
+        # Remove only explicit source qualifiers, never extra reasoning requests.
+        query = re.sub(r'^according to (?:the )?(?:dated )?(?:official )?lab (?:pages|website),?\s+', '', query)
+        query = re.sub(r' of (?:the )?mobiliar lab(?: for analytics)?(?: at eth(?: zürich| zurich)?)?$', '', query)
         if re.fullmatch(r'(?:who is|name|what is the name of) (?:the |our )?(?:lab director|scientific director)', query):
             result = directory_answer(question, self.pages)
             if not result or result.get('mode') != 'source-fact':

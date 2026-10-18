@@ -393,6 +393,29 @@ class LiveTransport(unittest.IsolatedAsyncioTestCase):
         # Context injection is not speech completion and emits no fake turn.
         self.assertTrue(self.session.output.empty())
 
+    async def test_cached_fact_records_exact_question_and_speaks_without_reasoning_or_echo_context(self):
+        question = 'Who is the scientific director?'
+        answer = 'The dated directory lists Fixture Person as scientific director.'
+        before = len(self.socket.sent)
+        self.assertTrue(await self.session.send_cached_fact(question, answer))
+        events = self.socket.sent[before:]
+        self.assertEqual(events[0]['type'], 'response.item.create')
+        self.assertEqual(events[0]['item']['content'][-1], {'type': 'input_text', 'text': question})
+        self.assertIn(answer, events[0]['item']['content'][0]['text'])
+        self.assertTrue(all(event['type'] == 'session.commentary.append' for event in events[1:]))
+        self.assertEqual(''.join(event['content'] for event in events[1:]), answer)
+        self.assertFalse(self.session.continue_requested)
+        for attribute in ('create_inflight', 'continue_requested'):
+            setattr(self.session, attribute, True)
+            before = len(self.socket.sent)
+            self.assertFalse(await self.session.send_cached_fact(question, answer))
+            self.assertEqual(len(self.socket.sent), before)
+            setattr(self.session, attribute, False)
+        await self.begin()
+        before = len(self.socket.sent)
+        self.assertFalse(await self.session.send_cached_fact(question, answer))
+        self.assertEqual(len(self.socket.sent), before)
+
     async def test_teaching_chunks_unicode_safely_and_rejects_invalid_narration_before_send(self):
         narration = 'ä' * 420
         await self.session.speak_teaching_step(narration)

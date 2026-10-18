@@ -381,6 +381,32 @@ When a visitor shares a document on a specified page, inspect THAT page first. D
                                     if (self.continuous_audio and not selected_pdf.document and not video_bridge.state.video
                                             and hasattr(self.knowledge, 'lookup_current')):
                                         cache_began = time.perf_counter()
+                                        # Only a complete narrowly matched fact can skip generation.
+                                        # Artifacts, fresh checks and pending model work retain reasoning.
+                                        if not text_only and hasattr(session, 'send_cached_fact') and hasattr(self.knowledge, 'quick_answer'):
+                                            fact = await asyncio.to_thread(self.knowledge.quick_answer, text)
+                                            if fact and fact.get('mode') == 'source-fact' and fact.get('sources'):
+                                                try:
+                                                    dates = [datetime.fromisoformat(str(source.get('fetched_at', '')).replace('Z', '+00:00'))
+                                                             for source in fact['sources']]
+                                                    date = min(dates).strftime('%d %B %Y').lstrip('0')
+                                                    wording = fact['answer'].replace('The public directory snapshot', "The lab's team page").replace(
+                                                        'The cached lab homepage', 'The lab homepage').replace('The cached project page', 'The project page')
+                                                    answer = 'As of ' + date + ', ' + wording[0].lower() + wording[1:]
+                                                    if fact.get('fact_kind') == 'directory-role':
+                                                        role = fact['answer'].removeprefix('The public directory snapshot lists ').removesuffix('.')
+                                                        name, separator, title = role.partition(' as the ')
+                                                        if separator:
+                                                            answer = name + ' is the ' + title + ", according to the lab's team page dated " + date + '.'
+                                                except (KeyError, TypeError, ValueError):
+                                                    answer = ''
+                                                if 1 <= len(answer) <= 420 and await session.send_cached_fact(text, answer):
+                                                    for source in fact['sources']: visual_sources[source['id']] = source
+                                                    await send({'event': 'sources', 'sources': fact['sources']})
+                                                    await send({'event': 'lab_cache_hit', 'source_count': len(fact['sources']),
+                                                        'freshness': fact['freshness'], 'response_mode': 'spoken-source-fact',
+                                                        'lookup_ms': round((time.perf_counter() - cache_began) * 1000, 2)})
+                                                    continue
                                         cached = await asyncio.to_thread(self.knowledge.lookup_current, {'question': text, 'refresh': False})
                                         if text_only and payload.get('request_id') != current_request_id: continue
                                         if cached.get('sources'):

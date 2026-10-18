@@ -46,9 +46,12 @@ export class PresentationLayout {
     this.set('--spoken-caption-floor', Math.max(110, root.bottom - dock.top + 14));
     const caption = this.caption.getBoundingClientRect();
     const hasCaption = this.caption.textContent.trim() && getComputedStyle(this.caption).display !== 'none';
-    const materialFloor = root.bottom - (hasCaption ? caption.top : dock.top) + 16;
+    const besideSource = root.width > 650 && document.body.classList.contains('paper-visible')
+      && !document.body.classList.contains('reading-answer');
+    const materialFloor = besideSource ? root.bottom - footer.top + 10
+      : root.bottom - (hasCaption ? caption.top : dock.top) + 16;
     // Published to the app so independently positioned PDF/video panels can use it.
-    const floor = Math.ceil(Math.max(145, materialFloor)) + 'px';
+    const floor = Math.ceil(Math.max(besideSource ? 42 : 145, materialFloor)) + 'px';
     if (document.documentElement.style.getPropertyValue('--presentation-floor') !== floor) document.documentElement.style.setProperty('--presentation-floor', floor);
     this.root.dataset.layoutReady = 'true';
   }

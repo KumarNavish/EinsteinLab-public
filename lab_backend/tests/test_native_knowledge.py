@@ -151,6 +151,8 @@ def test_quick_directory_and_mission_answers_are_complete_dated_source_facts():
     role = knowledge.quick_answer('Who is the scientific director?')
     assert role['answer'] == 'The public directory snapshot lists Dr. Joseph Ollier as the scientific director.'
     assert role['fact_kind'] == 'directory-role'
+    assert knowledge.quick_answer('According to the dated official lab pages, who is the scientific director of the Mobiliar Lab for Analytics at ETH Zürich?') == role
+    assert knowledge.quick_answer('Who is the scientific director of the Mobiliar Lab and why is their research better?') is None
     mission = knowledge.quick_answer('What does the lab work on?')
     quote = knowledge.pages[0]['text'].split('\n\n')[3]
     assert mission['answer'] == 'The cached lab homepage says: ' + quote

@@ -54,7 +54,7 @@ Backchannel policy: Never repeat or paraphrase a typed question aloud. Stay sile
 
 Interruption policy: Stop speaking when the visitor interrupts. Listen to what they say. When the visitor finishes speaking, address their latest request. Do not resume the previous answer unless asked.
 
-Visual teaching policy: Let the backend inspect the selected source and change the presentation before explaining a newly visible idea. Stay silent while teaching is pending. Do not explain plans or unconfirmed visuals. Speak only the current browser-confirmed teaching commentary as one connected conversational thought, with engaged curiosity and expressive emphasis, then pause for the next commentary or the visitor. Keep it short; do not expand it, prepend "here you see" or add framing. Avoid word-by-word delivery, lists and closing questions. Never narrate later stages or repeat a completed walkthrough.
+Visual teaching policy: Let the backend inspect the selected source and change the presentation before explaining a newly visible idea. Stay silent while teaching is pending. Do not explain plans or unconfirmed visuals. Speak only the current browser-confirmed commentary as one connected conversational thought in at most two short sentences, then pause. Keep source observation and inference distinct. Do not restate, expand, add framing or close with a question. Never narrate later stages or repeat a completed walkthrough.
 
 Delegation policy:
 Backend tools: Inspect lab and web evidence, calculate, inspect selected documents and video frames, and change the displayed page, annotations or explanatory drawing.
@@ -233,6 +233,7 @@ class OpenAILiveSession:
         self.muted = False
         self.input_control = None
         self.input_sequence = 0
+        self.typed_sequence = 0
         self.teaching_sequence = 0
         self.sent_commands = {}
         self.delegations, self.responses, self.calls = {}, {}, {}
@@ -255,7 +256,7 @@ class OpenAILiveSession:
             identity = event.get("event_id")
             # Only our generated identifiers can be echoed into retained usage.
             if (isinstance(identity, str) and len(identity) <= 80 and re.fullmatch(
-                    r'(?:einstein-close|input-control-[1-9][0-9]*|teaching-[1-9][0-9]*-(?:instruction|[0-9]+))', identity)):
+                    r'(?:einstein-close|input-control-[1-9][0-9]*|typed-request-[1-9][0-9]*|teaching-[1-9][0-9]*-(?:instruction|[0-9]+))', identity)):
                 self.sent_commands[identity] = event['type']
                 if len(self.sent_commands) > COMMAND_HISTORY_LIMIT:
                     del self.sent_commands[next(iter(self.sent_commands))]
@@ -580,6 +581,8 @@ class OpenAILiveSession:
         if not 1 <= len(items) <= 8 or sum(len(x.encode("utf-8")) for x in context) > 24_000:
             raise ValueError("Context input too large")
         async with self.send_lock:
+            if turn_complete and not backend_only:
+                await self._steer_typed_request(items[-1]['content'][-1].get('text', ''))
             for item in items:
                 await self.send({"type": "response.item.create", "item": item})
             # Typed requests belong to Responses user input. Mirroring them (or
@@ -643,6 +646,25 @@ class OpenAILiveSession:
                             {'type': 'input_text', 'text': question}]}})
             await self._append_commentary(answer)
             return True
+
+    async def _steer_typed_request(self, question):
+        """Notify the voice of supersession without reading the typed input.
+
+        Backend user items do not stop Live speech. This application-authored
+        instruction can redirect it; it neither cancels Responses work nor
+        establishes a playback boundary. Existing local playback gates still own
+        queued audio. Never interpolate visitor/source text into the instruction.
+        https://developers.openai.com/api/docs/guides/voice-server-controls?api=live#redirect-the-conversation
+        """
+        self.typed_sequence += 1
+        content = ("Stop speaking immediately. The visitor submitted a new typed request. "
+                   "Abandon the previous answer; do not finish or resume it. Prior request-specific length limits end here. Stay silent while the latest "
+                   "backend work is pending. Answer only the latest verified result, then listen. "
+                   "Do not read the typed request or announce this change.")
+        if re.match(r'\s*(?:in|answer in|reply in)\s+(?:one|1|a single)\s+sentence\b', question, re.I):
+            content += ' For this request only, the visitor requested exactly one sentence; answer in one sentence only.'
+        await self.send({'type': 'session.instructions.append', 'event_id': f'typed-request-{self.typed_sequence}',
+                         'delegation_id': None, 'content': content})
 
     async def _append_commentary(self, narration):
         self.teaching_sequence += 1

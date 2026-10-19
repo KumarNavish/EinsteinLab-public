@@ -1,14 +1,14 @@
 {
   "public_url": "https://einstein-mobiliar-lab.fastapicloud.dev",
   "depends_on_personal_computer": false,
-  "updated_on": "2026-10-18",
-  "public_release_status": "voice-source-regression-found-repairs-await-live-acceptance",
+  "updated_on": "2026-10-19",
+  "public_release_status": "deployed-final-opus-review-not-accepted",
   "checks": {
     "conversation": {
       "status": "failed",
-      "reason": "Latest four-question run echoed three typed questions; driver advanced from opening on echo plus quiet. A meaningful-answer interruption was not established. Transport repair has offline coverage only.",
-      "tested_source_commit": "6433a0d66717dabca619f743e850967b4d0d9bf1",
-      "post_patch_source_commit": "2b776398365c6642996ddb08b0b22954badc787c",
+      "reason": "Actual f5 interruption resumed old speech. Source repair and local playback reset diagnostics are deployed with offline coverage; no paid rerun.",
+      "tested_source_commit": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
+      "post_patch_source_commit": "da5df8198628aefe68e801e80300088788ee0254",
       "post_patch_live_acceptance": "not-run",
       "evidence": [
         {
@@ -30,10 +30,10 @@
       }
     },
     "paper": {
-      "status": "failed",
-      "reason": "Latest original Figure2 inspection produced three regions but teaching paused with zero rendered marks/steps. Earlier successful source walkthroughs remain historical. The preparation safety gate was preserved.",
-      "tested_source_commit": "6433a0d66717dabca619f743e850967b4d0d9bf1",
-      "post_patch_source_commit": "2b776398365c6642996ddb08b0b22954badc787c",
+      "status": "partial",
+      "reason": "Original page2 had3mark ACKs,3local speech boundaries and0manual advances. Content repeated/omitted side-exit context, cold analysis17.909s and first mark21.241s. Full source-experience acceptance pending.",
+      "tested_source_commit": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
+      "post_patch_source_commit": "da5df8198628aefe68e801e80300088788ee0254",
       "post_patch_live_acceptance": "not-run",
       "evidence": [
         {
@@ -56,7 +56,7 @@
     },
     "video": {
       "status": "passed",
-      "reason": "Actual selected authored video, two inspected original frames, source-ID annotation, play/pause0.5×, seek2s and rewind1s/mark cleanup passed. Comparison narration crossed the rewind prompt; audible action alignment is unverified.",
+      "reason": "Actual selected authored video, two inspected original frames, source-ID annotation, play/pause0.5\u00d7, seek2s and rewind1s/mark cleanup passed. Comparison narration crossed the rewind prompt; audible action alignment is unverified.",
       "evidence": [
         {
           "path": "evidence/2026-10-18-public-acceptance/2026-10-18T07-48-13-092Z/report.json",
@@ -70,7 +70,7 @@
     },
     "slides": {
       "status": "passed",
-      "reason": "Actual PPTX conversion, two original converted pages, correct source-ID marks and1→2→1 navigation passed. Synthetic A2/B5 and Control3/Treatment7 a.u. match fixtures; replay raster bound passed. Fonts/effects and broad deck compatibility remain limited.",
+      "reason": "Actual PPTX conversion, two original converted pages, correct source-ID marks and1\u21922\u21921 navigation passed. Synthetic A2/B5 and Control3/Treatment7 a.u. match fixtures; replay raster bound passed. Fonts/effects and broad deck compatibility remain limited.",
       "evidence": [
         {
           "path": "evidence/2026-10-18-public-acceptance/2026-10-18T07-48-13-092Z/report.json",
@@ -84,7 +84,7 @@
     },
     "visualization": {
       "status": "passed",
-      "reason": "Actual conceptual create/revise/focus, rendered-pixel inspection and dismiss acknowledgements passed. Thin soap film→surface tension retained conceptual scope. Human explanatory quality unverified.",
+      "reason": "Actual conceptual create/revise/focus, rendered-pixel inspection and dismiss acknowledgements passed. Thin soap film\u2192surface tension retained conceptual scope. Human explanatory quality unverified.",
       "evidence": [
         {
           "path": "evidence/2026-10-18-public-acceptance/2026-10-18T07-48-13-092Z/report.json",
@@ -122,8 +122,8 @@
       }
     },
     "failure_recovery": {
-      "status": "passed",
-      "reason": "Bounded recovery passed: genuine third-visitor capacity rejection while A/B remained active, two scheduled transport renewals, actual Stop/confirmed usage/room zero; focused source restart and typed cancellation also passed. No arbitrary network/provider fault, crash or current-source reload recovery claim. Current source scope and additional bounded source/diagnostic receipts are in the18October Opus delivery; historical evidence is not relabelled.",
+      "status": "failed",
+      "reason": "Actual f5 interruption resumed old speech. Source repair and local playback reset diagnostics are deployed with offline coverage; no paid rerun.",
       "evidence": [
         {
           "path": "evidence/2026-10-18-public-acceptance/2026-10-18T07-48-13-092Z/report.json",
@@ -141,11 +141,14 @@
           "path": "evidence/2026-10-18-opus-completion/delivery.json",
           "sha256": "5a6ac15e86d0f3af70f0b1ea524e2b34e19db31e6552bdb8f9ed233b3e4733c9"
         }
-      ]
+      ],
+      "tested_source_commit": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
+      "post_patch_source_commit": "da5df8198628aefe68e801e80300088788ee0254",
+      "post_patch_live_acceptance": "not-run"
     },
     "visitor_isolation": {
       "status": "passed",
-      "reason": "Three fresh independent public browser processes/cookies; distinct A/B conversations and no cross-context upload/code disclosure. Real third visitor capacity counter increased0→1 while room remained2. C started no provider; final global room0.",
+      "reason": "Three fresh independent public browser processes/cookies; distinct A/B conversations and no cross-context upload/code disclosure. Real third visitor capacity counter increased0\u21921 while room remained2. C started no provider; final global room0.",
       "evidence": [
         {
           "path": "evidence/2026-10-18-public-acceptance/2026-10-18T07-48-13-092Z/report.json",
@@ -357,21 +360,21 @@
     }
   },
   "current_verified_deployment": {
-    "id": "27f56c02-9791-4734-8fc9-01c62a6772d1",
-    "source_commit": "2b776398365c6642996ddb08b0b22954badc787c",
+    "id": "91d68b2c-33c3-4f38-8713-4afa9fff18ac",
+    "source_commit": "da5df8198628aefe68e801e80300088788ee0254",
     "deployment_status": "success",
     "failure": null,
     "voice": "voice_6ad3d14989108191bd288b0243ea99e4",
-    "scope": "Exact-main CI, owner terminal success and public HTTP/assets; no post-patch voice or listening acceptance."
+    "scope": "Owner success and actual provider-free browser readback. Paid run on f5 failed interruption; subsequent controls are not voice-validated."
   },
   "acceptance_basis": {
-    "status": "latest-recorded-slice-failed-post-patch-live-unverified",
-    "current_runtime_source": "2b776398365c6642996ddb08b0b22954badc787c",
-    "latest_live_test_runtime": "6433a0d66717dabca619f743e850967b4d0d9bf1",
+    "status": "failed-live-slice-post-review-repair-unvalidated",
+    "current_runtime_source": "da5df8198628aefe68e801e80300088788ee0254",
+    "latest_live_test_runtime": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
     "current_full_protocol_rerun": false,
     "failed_reports_relabelled": false,
-    "next_constraint": "No further paid start allocated. Permitted fresh live test and genuine listening judgment required; no naturalness/accent or successful source walkthrough claim.",
-    "current_deployment": "27f56c02-9791-4734-8fc9-01c62a6772d1"
+    "next_constraint": "One allocated final session and review completed. No paid retry remains. Human listening and a newly authorized live test are needed for acceptance; do not manufacture request/audio ownership.",
+    "current_deployment": "91d68b2c-33c3-4f38-8713-4afa9fff18ac"
   },
   "provider": {
     "voice_model": "gpt-live-1",
@@ -392,12 +395,12 @@
     "approval_expires": "2026-11-01T00:00:00Z"
   },
   "human_acceptance": {
-    "voice_age_accent_cadence": "UNVERIFIED. Latest actual64.08s rendered synthetic recording retained. Opus inspected text/images and cannot hear it; signal metrics do not establish accent, naturalness or enthusiasm.",
-    "explanatory_quality": "Latest6433 originalFigure2 test failed with zero marks; earlier84a/b185 progressive walkthroughs retain only their exact historical scopes. Current repair has no paid live rerun.",
+    "voice_age_accent_cadence": "Fresh3clips saved; owner ratings pending. Prior feedback natural but too flat/forced accent. Opus cannot hear text/images.",
+    "explanatory_quality": "Three original-source steps completed mechanically; content, framing, latency and interruption fell short. Final Opus verdict NOT ACCEPTED.",
     "physical_microphone_safari_quest": "UNVERIFIED",
     "cold_start_limit": "Original 55 MB asset and free-host cold starts remain a first-visit limitation; no startup SLA or cold-start performance acceptance is claimed.",
-    "speech_action_alignment": "Latest source sequence paused with zero marks; actual meaningful-answer interruption untested. No waveform ownership or physical microphone claim.",
-    "latency": "No instant/seamless voice claim. Prior b185 first mark11.751s remains historical; latest6433run produced no mark and includes echoed-question delay. No post-patch live latency measured.",
+    "speech_action_alignment": "3actual mark/boundary pairs observed; interruption failed. No provider response ownership or current repair live pass.",
+    "latency": "Two cached HTTP fact phrasings about180ms; f5 connected-session first transcript932ms/signal1127ms. Startup4454ms separate. Cold source analysis17.909s, first mark21241ms; source latency goal unresolved.",
     "startup": "Ego worklet stall repaired by1500ms compatibility path; actual84a voice startup5.8s and synthetic mic on6d96 passed. Warm cache/profile only; cold transfers remain separate."
   },
   "historical_readiness_reference": {
@@ -410,30 +413,15 @@
   "latest_product_review": {
     "consultant": "claude-opus-5-5",
     "effort": "max",
-    "api_calls": 4,
-    "estimated_conservative_cost_usd": 0.454525,
-    "cost_scope": "API token estimate, not bill or balance; excludes app voice/backend charges.",
-    "scope": "Actual Opus-chosen browser journey on6433; failed slice and one offline patch review. No hearing or post-patch live verdict.",
-    "source_review": {
-      "path": "evidence/2026-10-18-opus-voice-review/opus-review.md",
-      "sha256": "a0402d0873d608015955f2bae5c1b841d2227393ea1b1452dceae1bd1525d9a6"
-    },
-    "patch_review": {
-      "path": "evidence/2026-10-18-opus-voice-review/opus-patch-review.md",
-      "sha256": "3e6fee45a4b96616b8ce2dabc2c82919eec4dac01ac1aa71857deaf9ebf4edf7"
-    },
-    "reconciled_result": {
-      "path": "evidence/2026-10-18-opus-voice-review/reconciled-live-result.json",
-      "sha256": "1b943b09b3696b31cb055874b5dbca7595e56c6f28323ab0d5becd437fb2e965"
-    },
-    "usage": {
-      "path": "evidence/2026-10-18-opus-voice-review/patch-review-receipt.json",
-      "sha256": "ab9ed68291fa8757d26eeefbeb8a2293820cf29efdf43f95dabe33b514c8e775"
-    },
-    "delivery": {
-      "path": "evidence/2026-10-18-opus-voice-review/delivery.json",
-      "sha256": "e01a7304cc68472c4ff1e7fc5c2cc733b8d77b6780eba0e7d36dec7fc2fd4197"
-    }
+    "api_calls": 5,
+    "estimated_conservative_cost_usd": 0.754168,
+    "cost_scope": "Token estimate, not bill/balance; excludes app inference",
+    "scope": "Final actual Opus5.5/MAX review of failed f5 run and5326repair; text/images only. Subsequent cache/reset/notice changes are not a further Opus or paid-voice pass.",
+    "report_path": "evidence/2026-10-19-final-live-review/final-opus-review.md",
+    "plan_path": "docs/OPUS_CONVERGENCE_PLAN.md",
+    "handoff_path": "evidence/2026-10-19-final-live-review/handoff.json",
+    "verdict": "NOT_ACCEPTED",
+    "actual_model": "claude-opus-5-5"
   },
   "historical_full_acceptance": {
     "record": {
@@ -474,7 +462,7 @@
       "B video marking gate accepted One moment. Comparison transcript followed the next rewind prompt; rewind gate contained preceding comparison, with One second arriving later. Source marks, seek/rewind acknowledgements and times passed; speech-to-action seamlessness is unverified.",
       "Received transcript timestamps do not prove audible word timing or a human-heard stale utterance.",
       "First rendered signal took13.318s for next slide and19.408s for lab; those complete turns took24.185s/33.727s. Signal may be an acknowledgement or preceding answer; no blanket low-latency claim.",
-      "Original character startup was44.607–49.984s on three sequential fresh direct-route Mac browsers. Earlier default-proxy Mac transfer failures and hosted Ubuntu/Windows failures remain failed; no proxy-causality proof or universal startup repair.",
+      "Original character startup was44.607\u201349.984s on three sequential fresh direct-route Mac browsers. Earlier default-proxy Mac transfer failures and hosted Ubuntu/Windows failures remain failed; no proxy-causality proof or universal startup repair.",
       "Recovery scope is genuine capacity rejection, scheduled transport renewal and actual Stop/cleanup, plus focused source restart/typed cancellation. Arbitrary network/provider loss, crashes and current-source reload recovery were not tested.",
       "Voice naturalness, elderly German accent, cadence, teaching quality, awe and physical-device acoustics remain human-quality questions; configuration and functional receipts are not acceptance of them.",
       "Capacity branch works, but the third visitor sees a generic connection-failed banner rather than a polished busy-specific explanation.",
@@ -573,6 +561,87 @@
   },
   "current_public_evidence": {
     "delivery": {
+      "path": "evidence/2026-10-19-final-live-review/final-delivery.json",
+      "sha256": "f56542767d8bd85edb552e320db43dc4e8af08cfdd0f204b49734f6f8c7eac6c"
+    },
+    "owner": {
+      "path": "evidence/2026-10-19-final-live-review/final-owner-deployment.json",
+      "sha256": "25d56db1701d82fd485746a2a3abdd1bfe757dd11c3ce6a95dc1513aedd1934d"
+    },
+    "served": {
+      "path": "evidence/2026-10-19-final-live-review/final-free-checks.json",
+      "sha256": "9803efcf842cfbff2cb0f709b88393d64cff1c8c12128d13100acfe4ae43810b"
+    },
+    "quality": {
+      "path": "evidence/2026-10-19-final-live-review/final-source-ci.json",
+      "sha256": "14a523a847e6f1a1a2a4fd81d9fce9092d125c836f74108fec848879ae4970e6"
+    },
+    "review": {
+      "path": "evidence/2026-10-19-final-live-review/final-opus-review.md",
+      "sha256": "01781e3c048680e2d17af13c1d84b73960fee001e7601b82662122f6ea537449"
+    },
+    "failed_run": {
+      "path": "evidence/2026-10-19-final-live-review/reconciled-live-result.json",
+      "sha256": "304f6e33c9c672b0d4d4d00c463d1380cc62bf7a2219695301f114b28e2d3b84"
+    }
+  },
+  "prior_readiness_manifest": {
+    "path": "evidence/2026-10-18-opus-voice-review/pre-review-readiness.json",
+    "sha256": "48717063de6364cf2f5a792edde1592d5e109818e0daf110ef656c4638ff0a5c"
+  },
+  "previous_product_review": {
+    "consultant": "claude-opus-5-5",
+    "effort": "max",
+    "api_calls": 4,
+    "estimated_conservative_cost_usd": 0.454525,
+    "cost_scope": "API token estimate, not bill or balance; excludes app voice/backend charges.",
+    "scope": "Actual Opus-chosen browser journey on6433; failed slice and one offline patch review. No hearing or post-patch live verdict.",
+    "source_review": {
+      "path": "evidence/2026-10-18-opus-voice-review/opus-review.md",
+      "sha256": "a0402d0873d608015955f2bae5c1b841d2227393ea1b1452dceae1bd1525d9a6"
+    },
+    "patch_review": {
+      "path": "evidence/2026-10-18-opus-voice-review/opus-patch-review.md",
+      "sha256": "3e6fee45a4b96616b8ce2dabc2c82919eec4dac01ac1aa71857deaf9ebf4edf7"
+    },
+    "reconciled_result": {
+      "path": "evidence/2026-10-18-opus-voice-review/reconciled-live-result.json",
+      "sha256": "1b943b09b3696b31cb055874b5dbca7595e56c6f28323ab0d5becd437fb2e965"
+    },
+    "usage": {
+      "path": "evidence/2026-10-18-opus-voice-review/patch-review-receipt.json",
+      "sha256": "ab9ed68291fa8757d26eeefbeb8a2293820cf29efdf43f95dabe33b514c8e775"
+    },
+    "delivery": {
+      "path": "evidence/2026-10-18-opus-voice-review/delivery.json",
+      "sha256": "e01a7304cc68472c4ff1e7fc5c2cc733b8d77b6780eba0e7d36dec7fc2fd4197"
+    }
+  },
+  "latest_deployed_source": {
+    "commit": "da5df8198628aefe68e801e80300088788ee0254",
+    "ci": {
+      "conclusion": "success",
+      "databaseId": 39211602520,
+      "headSha": "da5df8198628aefe68e801e80300088788ee0254",
+      "status": "completed",
+      "url": "https://github.com/KumarNavish/EinsteinLab/actions/runs/39211602520"
+    },
+    "deployment": "success",
+    "deployment_id": "91d68b2c-33c3-4f38-8713-4afa9fff18ac",
+    "workflow_run": 39211855698,
+    "reason": "Post-review safeguards deployed, free browser readback passed. Voice/whole-product acceptance is not established."
+  },
+  "final_live_review_continuation": {
+    "handoff_path": "evidence/2026-10-19-final-live-review/handoff.json",
+    "voice_starts": 1,
+    "provider_voice_seconds": 147,
+    "opus_calls": 1,
+    "human_listening": "pending",
+    "verdict": "NOT_ACCEPTED",
+    "paid_retries": 0
+  },
+  "prior_public_evidence_before_final_review": {
+    "delivery": {
       "path": "evidence/2026-10-18-opus-completion/delivery.json",
       "sha256": "5a6ac15e86d0f3af70f0b1ea524e2b34e19db31e6552bdb8f9ed233b3e4733c9"
     },
@@ -592,9 +661,5 @@
       "path": "evidence/2026-10-18-opus-completion/accepted-source-summary.json",
       "sha256": "f5a3bbb732ada05604d31ccb1695a014623ba927b669090742bb02c8a22b3f6a"
     }
-  },
-  "prior_readiness_manifest": {
-    "path": "evidence/2026-10-18-opus-voice-review/pre-review-readiness.json",
-    "sha256": "48717063de6364cf2f5a792edde1592d5e109818e0daf110ef656c4638ff0a5c"
   }
 }

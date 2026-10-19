@@ -1,6 +1,6 @@
 {
-  "source_commit": "f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933",
-  "scope": "Independent public webapp source snapshot. Updated source files use Git blob SHA-1 pins; unchanged original snapshot files retain SHA256 pins. No development history, original Unity assets, owner logs, credentials or private session recordings. Deployment and live acceptance are separate.",
+  "source_commit": "da5df8198628aefe68e801e80300088788ee0254",
+  "scope": "Independent selective webapp source snapshot: runtime source files from the declared commit, with dated supplemental release/review reports and per-file hashes. No private development history, original Unity assets, owner logs, credentials or session recordings. Deployment and acceptance remain separate.",
   "excluded_upstream_lfs_assets": [
     "tools/Albert Einstein rigify.blend"
   ],
@@ -139,7 +139,7 @@
     },
     {
       "path": "lab_backend/openai_live.py",
-      "git_blob_sha": "f9a44286a4143f6ed33bc52265a887da58499cd0"
+      "git_blob_sha": "fa447187ef0f27199cd114216c6392e3438d5932"
     },
     {
       "path": "lab_backend/__init__.py",
@@ -323,7 +323,7 @@
     },
     {
       "path": "release/readiness.json",
-      "sha256": "f59758d2ef10232f8fb8dc112cf3be23117e3514f8979f42f6358a2fe0197b63"
+      "sha256": "6d5b981cb42629fdf9041c94245ef2c3fc040baddec22fa1cb0a4db43c28fa7b"
     },
     {
       "path": "docs/SESSION_CHECKPOINT_C5.md",
@@ -599,7 +599,7 @@
     },
     {
       "path": "lab_backend/tests/test_openai_live.py",
-      "git_blob_sha": "c92d3335c74843a4e125f5983a6d2dcfe521cf3f"
+      "git_blob_sha": "4ac074a6ac808d9a79d726b1a25c8d3cf2d51ca7"
     },
     {
       "path": "lab_backend/tests/test_local_documents.py",
@@ -959,7 +959,7 @@
     },
     {
       "path": "rehearsal/tests/native-audio.test.js",
-      "sha256": "353ad32690ee18927bdcf30ae7fba700a04cedc8df566ea6e738d3076f23cd1e"
+      "git_blob_sha": "62c4a596154d58945a7ea02a3ddb27e399c7254b"
     },
     {
       "path": "rehearsal/tests/native-presence.e2e.mjs",
@@ -1155,7 +1155,7 @@
     },
     {
       "path": "rehearsal/src/native-audio.js",
-      "sha256": "21d8ec48c67919c8491293f6b256df36dd006d2ec296dba7a43e66a3de6b6114"
+      "git_blob_sha": "72fb1a0ee23e20d224170c55feba9e73bf519cdc"
     },
     {
       "path": "rehearsal/src/web-evidence.js",
@@ -1251,7 +1251,7 @@
     },
     {
       "path": "rehearsal/src/style.css",
-      "git_blob_sha": "add820fa7696309446081f5b86bbfc129ac3f845"
+      "git_blob_sha": "0e054cb0bf0d76861b41c09e2a5b52d5627c9a40"
     },
     {
       "path": "rehearsal/src/scheduled-speech-queue.js",
@@ -1440,6 +1440,10 @@
     {
       "path": "docs/OPUS_CONVERGENCE_PLAN.md",
       "git_blob_sha": "2ab14870c355a2ed818d9dd4d0d1a66715dd62ad"
+    },
+    {
+      "path": "docs/OPUS_FINAL_REVIEW.md",
+      "sha256": "01781e3c048680e2d17af13c1d84b73960fee001e7601b82662122f6ea537449"
     }
   ]
 }

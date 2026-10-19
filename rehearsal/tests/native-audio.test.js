@@ -143,3 +143,22 @@ test('invalid PCM cannot be decoded or uploaded as undefined samples', () => {
   assert.deepEqual([...result.slice(0, 3)], [0, 0, 0]);
   assert(result[3] > .99 && result[4] < -.99);
 });
+
+
+test('typed submission flushes queued playback and records its epoch before sending the question', () => {
+  const order = [], stats = {};
+  const player = {version: 4, queue: ['old samples'], stop() { this.queue.length = 0; this.version++; order.push('flush'); }};
+  const conversation = new NativeConversation({player, stats, onState() {}, onError() {},
+    onEvent: event => order.push(event.event)});
+  conversation.active = true; conversation.continuousAudio = true;
+  conversation.socket = {readyState: WebSocket.OPEN, send: raw => { if (JSON.parse(raw).type === 'text') order.push('submit'); }};
+  conversation.sendText('Private typed question');
+  assert.deepEqual(player.queue, []);
+  assert(order.indexOf('flush') < order.indexOf('typed_playback_flush'));
+  assert(order.indexOf('typed_playback_flush') < order.indexOf('input_start'));
+  assert(order.indexOf('input_start') < order.indexOf('submit'));
+  assert.equal(stats.nativeTypedPlaybackFlush.previousPlaybackVersion, 4);
+  assert.equal(stats.nativeTypedPlaybackFlush.playbackVersion, 5);
+  assert(!JSON.stringify(stats.nativeTypedPlaybackFlush).includes('Private'));
+  assert.equal(stats.nativeTurnOwnership.audioAttribution, 'unverified');
+});

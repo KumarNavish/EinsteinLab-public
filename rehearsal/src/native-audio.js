@@ -668,7 +668,11 @@ export class NativeConversation {
     this.cancelTeaching();
     this.outputTranscriptTail = '';
     this.outputSignalBaseline = this.stats.audioRenderedSignalSamples || 0;
+    const previousPlaybackVersion = this.player.version;
     this.resetPlayback();
+    const flush = {previousPlaybackVersion, playbackVersion: this.player.version, at: performance.now()};
+    this.stats.nativeTypedPlaybackFlush = flush;
+    this.onEvent({event: 'typed_playback_flush', ...flush});
     this.onEvent({event: 'input_start', source: 'typed', text: displayText});
     this.firstAudioPending = true; this.suppressAudio = this.continuousAudio && this.speaking;
     this.stats.nativeTextSentAt = performance.now(); this.stats.nativeLastSpeechEndAt = null;

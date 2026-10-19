@@ -6,11 +6,11 @@ A browser-based research companion with a 3D Einstein portrayal, live voice, a r
 
 This is an early research prototype. Voice delivery, response latency and the timing of guided source explanations are still being refined. The current live configuration uses GPT-Live 1 and GPT-6.1 Sol. Speech is AI-generated; it is not a historical Einstein recording.
 
-The latest source adds a direct speech path for short dated lab facts, cleaner captions/history and a larger source workspace. These changes passed source-level checks and the host now confirms their deployment succeeded. Fresh browser/voice acceptance is pending because the owned testing browser space disappeared; no successful final review is claimed. The existing live app remains an early prototype.
+The latest live test completed three marked steps on an original paper and returned the tested cached lab facts in about 0.18 seconds. It failed interruption, and initial source analysis took about 18 seconds. The deployed controls have offline coverage and free browser checks; they have not passed another paid voice run. Voice quality still needs human listening feedback. [Read the final review](docs/OPUS_FINAL_REVIEW.md).
 
 ## Source snapshot
 
-This independent public repository contains the webapp source and tests from revision `f5aa14fb4dbdcbe4796cd6d589d70bd43f97c933`. `PUBLIC_SNAPSHOT.json` records the copied files and hashes. The private development repository and existing deployment remain separate. This copy contains no production credentials, private owner logs, original Unity assets or private test-session recordings. Historical docs may refer to private development evidence. The application builds on the original Einstein character project by Rayna Ney; no new licence to that character or its motion assets is asserted.
+This independent public repository contains the webapp source and tests from revision `da5df8198628aefe68e801e80300088788ee0254`. `PUBLIC_SNAPSHOT.json` records the copied files and hashes; supplemental release and review reports reflect the final 19 October evaluation. The private development repository and existing deployment remain separate. This copy contains no production credentials, private owner logs, original Unity assets or private test-session recordings. Historical docs may refer to private development evidence. The application builds on the original Einstein character project by Rayna Ney; no new licence to that character or its motion assets is asserted.
 
 ## Run and test
 

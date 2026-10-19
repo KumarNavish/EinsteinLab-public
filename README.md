@@ -6,7 +6,7 @@ A browser-based research companion with a 3D Einstein portrayal, live voice, a r
 
 This is an early research prototype. Voice delivery, response latency and the timing of guided source explanations are still being refined. The current live configuration uses GPT-Live 1 and GPT-6.1 Sol. Speech is AI-generated; it is not a historical Einstein recording.
 
-The latest source adds a direct speech path for short dated lab facts, cleaner captions/history and a larger source workspace. These changes passed source-level checks; their public deployment and fresh live acceptance are still pending. The existing live app remains an early prototype.
+The latest source adds a direct speech path for short dated lab facts, cleaner captions/history and a larger source workspace. These changes passed source-level checks and the host now confirms their deployment succeeded. Fresh browser/voice acceptance is pending because the owned testing browser space disappeared; no successful final review is claimed. The existing live app remains an early prototype.
 
 ## Source snapshot
 
